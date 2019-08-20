@@ -160,7 +160,7 @@ return context;
 
 代理模式可以认为是 Mybatis 的核心使用的模式，正是由于这个模式，我们只需要编写 Mapper.java 接口，不需要实现，由 Mybatis 后台帮我们完成具体 SQL 的执行。
 
-代理模式 (Proxy Pattern) ：给某一个对象提供一个代 理，并由代理对象控制对原对象的引用。代理模式的英 文叫做 Proxy 或 Surrogate，它是一种对象结构型模式。
+代理模式 (Proxy Pattern) ：给某一个对象提供一个代理，并由代理对象控制对原对象的引用。代理模式的英 文叫做 Proxy 或 Surrogate，它是一种对象结构型模式。
 
 代理模式包含如下角色：
 
