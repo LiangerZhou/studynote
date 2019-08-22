@@ -175,7 +175,3 @@ B + 树中的卫星数据（Satellite Information）：
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGrhjbBgkNEqGwLjaRu359pWGz1E1iciaq8bzs2miaDPcn7pibLThbjA5llpOjTh0DdyCQXT9g8evfibdPQ/0?wx_fmt=jpeg)
 
 —————END—————
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**梦见**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)

@@ -211,7 +211,3 @@ void transfer(Entry[] newTable, boolean rehash) {
 ****2.**Hashmap 的** Resize 包含扩容和 ReHash 两个步骤，ReHash 在并发的情况下可能会形成链表环。****
 
 —————END—————
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**程序员小灰**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)
