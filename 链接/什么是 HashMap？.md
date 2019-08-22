@@ -157,7 +157,3 @@ index =  Hash（“apple”）
 ![](https://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoXt6UNkvyibQ8ufeF48pvm2ZicHCia0v40CMKcqxXAQGkwWppJLZYEv6SRSwoxx8aVibHbaCa3MIXicBA/0?wx_fmt=jpeg)
 
 —————END—————
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**程序员小灰**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)

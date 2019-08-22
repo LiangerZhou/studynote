@@ -20,12 +20,6 @@
 
 一个哈希值对应无数个明文，理论上你并不知道哪个是。
 
-> “船长，如果一样东西你知道在哪里，还算不算丢了。”
->
-> “不算。”
->
-> “好的，那您的酒壶没有丢。”
-
 ### 4. 混淆特性
 
 输入一些数据计算出散列值，然后部分改变输入值，一个具有强混淆特性的散列函数会产生一个完全不同的散列值。
@@ -54,13 +48,59 @@ SHA-1（英语：Secure Hash Algorithm 1，中文名：安全散列算法 1）�
 
 SHA-1 曾经在许多安全协议中广为使用，包括 TLS 和 SSL、PGP、SSH、S/MIME 和 IPsec，曾被视为是 MD5 的后继者。
 
+## 常用的构造散列函数的方法
+
+### 基本原则
+
+“好的散列函数 = 计算简单 + 分布均匀”。其中计算简单指的是散列函数的计算时间不应该超过其他查找技术与关键字比较的时间，而分布均匀指的是散列地址分布均匀。
+(1) 计算散列地址所需的时间；
+
+(2) 关键字的长度；
+
+(3) 列表的大小；
+
+(4) 关键字的分布情况；
+
+(5) 记录查找的频率。
+
+### 具体方法
+
+散列函数能使对一个数据序列的訪问过程更加迅速有效，通过散列函数，数据元素将被更快地定位：
+
+#### 直接寻址法
+
+取关键字keyword或关键字keyword的某个线性函数值为散列地址。即H(key)=key或H(key) = a•key + b，当中a和b为常数（这样的散列函数叫做自身函数）。
+其优点是简单、均匀，不会产生冲突；但缺点是需要知道关键字的分布情况，希望数值是连续的。
+
+#### 数字分析法
+
+数字分析法通常适合处理关键字位数比较大的情况，分析一组数据，比如一组员工的出生年月日，这时我们发现出生年月日的前几位数字大体同样，这种话，出现冲突的几率就会非常大，可是我们发现年月日的后几位表示月份和详细日期的数字区别非常大，假设用后面的数字来构成散列地址，则冲突的几率会明显减少。因此数字分析法就是找出数字的规律，尽可能利用这些数据来构造冲突几率较低的散列地址。
+
+#### 平方取中法
+
+将关键字keyword平方之后取中间若干位数字作为散列地址。这种方法适用于不知道关键字的分布，且数值的位数又不是很大的情况。
+
+#### 折叠法
+
+将关键字keyword切割成位数同样的几部分，最后一部分位数能够不同，然后取这几部分的叠加和（去除进位）作为散列地址。
+
+#### 随机数法
+
+选择一随机函数，取关键字keyword的随机值作为散列地址，通经常使用于关键字keyword长度不同的场合。
+
+#### 除留余数法( *最常用* )
+
+取关键字keyword被某个不大于散列表表长m的数p除后所得的余数为散列地址。即
+$$H(key) = key MOD p, p<=m$$
+不仅能够对关键字keyword直接取模，也可在折叠、平方取中等运算之后取模。对p的选择非常重要，一般取素数或m，若p选的不好，容易产生同义词。
+
 ## 散列冲突
 
 理想中的一个散列函数，希望达到
 
 > 如果 key1 ≠ key2，那 hash(key1) ≠ hash(key2)
 
-这种效果，然而在真实的情况下，要想找到一个不同的 key 对应的散列值都不一样的散列函数，几乎是不可能的，即使是 **MD5** 或者 由美国国家安全局设计的 **SHA-1** 算法也无法实现。
+这种效果，然而在真实的情况下，要想找到一个不同的 **key** 对应的散列值都不一样的散列函数，几乎是不可能的，即使是 **MD5** 或者 由美国国家安全局设计的 **SHA-1** 算法也无法实现。
 
 **事实上，再好的散列函数都无法避免散列冲突。**
 
@@ -70,67 +110,49 @@ SHA-1 曾经在许多安全协议中广为使用，包括 TLS 和 SSL、PGP、SS
 
 抽屉原理：桌上有十个苹果，要把这十个苹果放到九个抽屉里，无论怎样放，我们会发现至少会有一个抽屉里面至少放两个苹果。这一现象就是我们所说的 “抽屉原理”。
 
-**散列冲突**
-
-理想中的一个散列函数，希望达到：
-
-> 如果 key1 ≠ key2，那 hash(key1) ≠ hash(key2)。
-
-这种效果，然而在真实的情况下，要想找到一个不同的 key 对应的散列值都不一样的散列函数，几乎是不可能的，即使是 MD5 或者 由美国国家安全局设计的 SHA-1 算法也无法实现。
-
-**事实上，再好的散列函数都无法避免散列冲突。**为什么呢？这涉及到数学中比较好理解的一个原理：抽屉原理。
-
-抽屉原理：桌上有十个苹果，要把这十个苹果放到九个抽屉里，无论怎样放，我们会发现至少会有一个抽屉里面至少放两个苹果。这一现象就是我们所说的 “抽屉原理”。
-
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusEHWLSDFYxapBJ4k4KvNoPKw7MGvibrPrLXGbkuL87HWk6IWibZNKAd9g/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusEHWLSDFYxapBJ4k4KvNoPKw7MGvibrPrLXGbkuL87HWk6IWibZNKAd9g/640?wx_fmt=gif)
 
-散列冲突
+### 散列冲突解决方法
 
-那应该如何解决散列冲突问题呢？常用的散列冲突解决方法有两类，开放寻址法（open addressing）和链表法（chaining）。
+那应该如何解决散列冲突问题呢？常用的散列冲突解决方法有两类：
 
-### 开放寻址法
+1. **开放寻址法（open addressing）**
+
+2. **链表法（chaining）**
+
+#### 开放寻址法
 
 定义：将散列函数扩展定义成探查序列，即每个关键字有一个探查序列 h(k,0)、h(k,1)、…、h(k,m-1)，这个探查序列一定是 0….m-1 的一个排列（一定要包含散列表全部的下标，不然可能会发生虽然散列表没满，但是元素不能插入的情况），如果给定一个关键字 k，首先会看 h(k,0) 是否为空，如果为空，则插入；如果不为空，则看 h(k,1) 是否为空，以此类推。
 
-开放寻址法是一种解决碰撞的方法，对于开放寻址冲突解决方法，比较经典的有线性探测方法（Linear Probing）、二次探测（Quadratic probing）和 双重散列（Double hashing）等方法。
+开放寻址法是一种解决碰撞的方法，对于开放寻址冲突解决方法，比较经典的有：线性探测方法（Linear Probing）、二次探测（Quadratic probing）和 双重散列（Double hashing）等方法。
 
-### 线性探测方法
+##### 1. 开放寻址法之线性探测方法
 
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusRgxUzvsicUbZrJG1yeDHribO1W15B5FJEibicxN8LdOpkwEZS438ev6uRg/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusRgxUzvsicUbZrJG1yeDHribO1W15B5FJEibicxN8LdOpkwEZS438ev6uRg/640?wx_fmt=gif)
 
-开放寻址法之线性探测方法
-
 当我们往散列表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，我们就从当前位置开始，依次往后查找，看是否有空闲位置，直到找到为止。
-
-以上图为例，散列表的大小为 8 ，黄色区域表示空闲位置，橙色区域表示已经存储了数据。目前散列表中已经存储了 4 个元素。此时元素 7777777  经过 Hash 算法之后，被散列到位置下标为 7 的位置，但是这个位置已经有数据了，所以就产生了冲突。
-
-于是按顺序地往后一个一个找，看有没有空闲的位置，此时，运气很好正巧在下一个位置就有空闲位置，将其插入，完成了数据存储。
-
-线性探测法一个很大的弊端就是当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，需要从头到尾探测整个散列表，所以最坏情况下的时间复杂度为 O(n)。
 
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusUflr2nzy94V1zoKnyZNicbTy2cRQmwosverW83VAI3fID0ibicuIDMzUA/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusUflr2nzy94V1zoKnyZNicbTy2cRQmwosverW83VAI3fID0ibicuIDMzUA/640?wx_fmt=gif)
 
-开放寻址法之线性探测方法的弊端
+以上图为例，散列表的大小为 8 ，黄色区域表示空闲位置，橙色区域表示已经存储了数据。目前散列表中已经存储了 4 个元素。此时元素 7777777  经过 Hash 算法之后，被散列到位置下标为 7 的位置，但是这个位置已经有数据了，所以就产生了冲突。于是按顺序地往后一个一个找，看有没有空闲的位置，此时，运气很好正巧在下一个位置就有空闲位置，将其插入，完成了数据存储。
 
-### 二次探测方法
+线性探测法一个很大的弊端就是当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，需要从头到尾探测整个散列表，所以最坏情况下的时间复杂度为 O(n)。
+
+##### 2. 二次探测方法
 
 二次探测是二次方探测法的简称。顾名思义，使用二次探测进行探测的步长变成了原来的 “二次方”，也就是说，它探测的下标序列为 hash(key)+0，hash(key)+1^2 或 [hash(key)-1^2]，hash(key)+2^2 或 [hash(key)-2^2]。
 
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusjTV2CIiaNZ9oGcz3cSVFuDibEkrsPNH46Ze8zXyibyX44x9JekeTlmYFw/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusjTV2CIiaNZ9oGcz3cSVFuDibEkrsPNH46Ze8zXyibyX44x9JekeTlmYFw/640?wx_fmt=gif)
 
-二次探测方法
-
 以上图为例，散列表的大小为 8 ，黄色区域表示空闲位置，橙色区域表示已经存储了数据。目前散列表中已经存储了 7 个元素。此时元素 7777777  经过 Hash 算法之后，被散列到位置下标为 7 的位置，但是这个位置已经有数据了，所以就产生了冲突。
 
 按照二次探测方法的操作，有冲突就先 + 1^2，8 这个位置有值，冲突；变为 - 1^2，6 这个位置有值，还是有冲突；于是 - 2^2， 3 这个位置是空闲的，插入。
 
-### 双重散列方法
+##### 3. 双重散列方法
 
 所谓双重散列，意思就是不仅要使用一个散列函数，而是使用一组散列函数 hash1(key)，hash2(key)，hash3(key)。。。。。。先用第一个散列函数，如果计算得到的存储位置已经被占用，再用第二个散列函数，依次类推，直到找到空闲的存储位置。
 
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusoKZb0rprfKu4UicAUbcHZRHjDvheXjWibqv8sF6QHz46fNbKc4Dwl7WQ/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusoKZb0rprfKu4UicAUbcHZRHjDvheXjWibqv8sF6QHz46fNbKc4Dwl7WQ/640?wx_fmt=gif)
-
-双重散列方法
 
 以上图为例，散列表的大小为 8 ，黄色区域表示空闲位置，橙色区域表示已经存储了数据。目前散列表中已经存储了 7 个元素。此时元素 7777777  经过 Hash 算法之后，被散列到位置下标为 7 的位置，但是这个位置已经有数据了，所以就产生了冲突。
 
@@ -142,10 +164,12 @@ SHA-1 曾经在许多安全协议中广为使用，包括 TLS 和 SSL、PGP、SS
 
 加载因子是表示 Hsah 表中元素的填满的程度，若加载因子越大，则填满的元素越多, 这样的好处是：空间利用率高了, 但冲突的机会加大了。反之, 加载因子越小, 填满的元素越少, 好处是冲突的机会减小了，但空间浪费多了。
 
-### 链表法
+#### 链表法
 
 链表法是一种更加常用的散列冲突解决办法，相比开放寻址法，它要简单很多。如下动图所示，在散列表中，每个位置对应一条链表，所有散列值相同的元素都放到相同位置对应的链表中。
 
 ![https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusNtvzBbQphYqtql3d6S9n7U3RWnUWvDqcCvclwW1UeD7ElU1zIPQzOw/640?wx_fmt=gif](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_gif/D67peceibeISZg79Zp1WzclUJUjcLKFusNtvzBbQphYqtql3d6S9n7U3RWnUWvDqcCvclwW1UeD7ElU1zIPQzOw/640?wx_fmt=gif)
 
-链表法
+## 参考
+
+1. [https://www.zhihu.com/question/26762707](https://www.zhihu.com/question/26762707)

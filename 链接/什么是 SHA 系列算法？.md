@@ -125,11 +125,3 @@ SHA 家族的最新成员 SHA-3 已经于 2015 年问世。关于 SHA-3 的细�
 4. 介绍增长黑客们如何用技术变现
 
 5. 思考并实践增长黑客策略，写成日志
-
-关注小专栏平台公众号，在小专栏平台回复 “独立黑盒” 即可获得免费订阅地址
-
-![](https://mmbiz.qpic.cn/mmbiz_png/NtO5sialJZGqOEJSOuHdBr383pNVb4zMWliaHuJ5pvfV758SpFClEo4F9M1Hkjeibqwa4mTDCLO8SFXBHtdM0cvNA/0?wx_fmt=png)
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**梦见**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)

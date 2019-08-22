@@ -292,7 +292,3 @@ Mi 是第一步处理后的原文。在第一步中，处理后原文的长度�
 ![](https://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGr5x46g5CKgCZe1AQNib7BUHczpnDfGbOSGogdw5ZHYKwTJo8YmPCSS4HQBjWdCibGqeqEJFn4c5Mkw/0?wx_fmt=jpeg)
 
 —————END—————
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**梦见**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)

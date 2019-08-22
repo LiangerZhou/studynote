@@ -322,7 +322,3 @@ CBC 模式的好处是什么呢？
 ![](https://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGp77X4s4J7NLiarnBjJpTibPxJvp2AWTtBQmCcdNAfQ6ShH99E9hPGkiadfmztbJ2EdNwWGGibyAexa5A/0?wx_fmt=jpeg)
 
 —————END—————
-
-喜欢本文的朋友们，欢迎长按下图关注订阅号**程序员小灰**，收看更多精彩内容
-
-![](http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGoBj18gILw2hefgpNaCia1eRhNCzRx29e1DpVhicyenCic4RQibDTbzySoqqpOrmBxu7KlLZM73YDDPJg/0?wx_fmt=jpeg)
