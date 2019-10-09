@@ -1,1 +1,1 @@
-# studynote
+All contents of The repository used are for demonstration and educational purposes. All rights are reserved to their original owners. If you (as a person or a company) own the content and do not wish it to be associated with this project, please contact us and we will gladly take it down.
