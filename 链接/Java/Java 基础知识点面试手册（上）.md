@@ -265,7 +265,7 @@ String 经常作为参数，String 不可变性可以保证参数不可变。例
 
 String 不可变性天生具备线程安全，可以在多个线程中安全地使用。
 
-Program Creek : Why String is immutable in Java?
+[Program Creek : Why String is immutable in Java?](https://www.programcreek.com/2013/04/why-string-is-immutable-in-java/)
 
 ### 3. String, StringBuffer and StringBuilder
 
