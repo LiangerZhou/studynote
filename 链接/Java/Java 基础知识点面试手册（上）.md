@@ -1611,7 +1611,7 @@ Class.forName 常见的场景是在数据库驱动初始化的时候调用。
 
 答：java.lang、java.util、java.io、java.net、java.sql。
 
-## 集合
+## 9. 集合
 
 ![集合类](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZ638wmudiadnQFvfEXsyl303Kh9WxERrLdqOnEicRtGuYEjFgKYD8vRXGwqkh6jNF0d2SPicibsotLrQ/640?wx_fmt=png)
 
