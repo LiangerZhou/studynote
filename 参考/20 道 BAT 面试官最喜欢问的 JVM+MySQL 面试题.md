@@ -82,7 +82,6 @@ safepoint)
 
 4. 抛出异常的位置
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoG1h9UicuhnGbKBox7icUibSJ57icibTXrt6muPVHLnWtcDrao9ickOTZyCib1zib5RojtbmQTGibHUxKqXnA/640?wx_fmt=png)
 
 **6. GC 的三种收集方法：标记清除、标记整理、复制算法的原理与特点，分别用在什么地方，如果让你优化收集方法，有什么思路？**
 
@@ -124,7 +123,6 @@ mat（eclipse 的也要了解一下）
 
 号引用转化为直接引用（指针引用），初始化就是开始执行构造器的代码
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoG1h9UicuhnGbKBox7icUibSJRtW3G6FF2jwIj2VFzHT7UAgWpceKTHZwx8Ve0VzKBK8kJWW5br2NAQ/640?wx_fmt=png)
 
 **1. 数据库三范式是什么?**
 
@@ -188,7 +186,6 @@ mat（eclipse 的也要了解一下）
 
 7. 获取表内所有 Field 对象的名称和类型 :describe table_name;
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoG1h9UicuhnGbKBox7icUibSJSNJxh3R3TdIYF2h9Ojuia4iaepV27CibaZOv54C9py60VagjpLWLalvRQ/640?wx_fmt=png)
 
 **6.mysql 的复制原理以及流程。**
 

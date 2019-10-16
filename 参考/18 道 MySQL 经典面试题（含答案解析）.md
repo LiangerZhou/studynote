@@ -47,8 +47,6 @@ MySQL 的复制是基于如下 3 个线程的交互（ 多线程复制里面应�
 
 5.6 的多库复制有时候自己会停止，我们写了一个脚本重新 start slave; 待补充…
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8Y4tqynNU5LpKRYbevs8xNM5IuucG8u86Ggajk1ia3Lc2aGkoUpU5Rhw/640?wx_fmt=png)
-
 二、MySQL 中 myisam 与 innodb 的区别，至少 5 点
 
 
@@ -120,7 +118,6 @@ myisam 更快，因为 myisam 内部维护了一个计数器，可以直接调�
 
 都是 B + 树索引， Innodb 是索引组织表， myisam 是堆表， 索引组织表和堆表的区别要熟悉
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8j8RzCrOcwzfgHS1oPpia7icCAqjX4u8yN0jeSBfwc3x7PXNaxUrtXjBQ/640?wx_fmt=png)
 
 三、MySQL 中 varchar 与 char 的区别以及 varchar(50) 中的 50 代表的涵义
 
@@ -168,7 +165,6 @@ Undo：在 MySQL5.5 之前， undo 只能存放在 ibdata * 文件里面， 5.6 
 
 状态，崩溃恢复时，如果 redo log 中事务没有对应的 commit 记录，那么需要用 undo 把该事务的修改回滚到事务开始之前。如果有 commit 记录，就用 redo 前滚到该事务完成时并提交掉。
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8qgZrtysbphrMT2zvyMw0jlRxibzWnwDHDl41icjMBIKcCBnEBTog9ymQ/640?wx_fmt=png)
 
 五、MySQL binlog 的几种日志录入格式以及区别
 
@@ -269,7 +265,6 @@ Explain 结果中，一般来说，要看到尽量用 index(type 为 const、 re
 
 被驱动表的连接列，也需要建立索引。被驱动表的连接列也可能会跟 where 条件列一起建立联合索引。当有排序或者 group by 的需求时，也可以考虑建立索引来达到直接排序和汇总的需求。
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8gVn3bHb71MfLxkwXLDyDk4k9JAAbVZK9bkcQTCdaJKS0hSPxXLNU9A/640?wx_fmt=png)
 
 八、备份计划，mysqldump 以及 xtranbackup 的实现原理
 
@@ -350,8 +345,6 @@ INSERT INTO `helei` VALUES (3,21,5,14,'2016-10-18 06:19:24','susu');
 ------------------------
 
 可以使用批量 ssh 工具 pssh 来对需要重启的机器执行重启命令。也可以使用 salt（前提是客户端有安装 salt）或者 ansible（ ansible 只需要 ssh 免登通了就行）等多线程工具同时操作多台服务器
-
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8G45GlLlB3YNE8mPsgOpkrNspKR1pUmlMAWr3qokmhgV1P9t7LQticAw/640?wx_fmt=png)
 
 十一、innodb 的读写参数优化
 
@@ -527,5 +520,3 @@ Serializable: 事务只能一个接着一个地执行，但不能并发执行。
 不同的隔离级别有不同的现象，并有不同的锁定 / 并发机制，隔离级别越高，数据库的并发性就越差。
 
 ![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyrpiaOwibUqyH2GtIcIuicb3m8E9u76cfXKCxh2HPENVlicCLmFXjBOCKXrkSbouAkKltDSddOMlHaB9g/640?wx_fmt=png)
-
-↓↓↓Java 高级架构师课程免费体验课

@@ -1,6 +1,3 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://mp.weixin.qq.com/s/rmtHYPfHkLZWM1IaFgRs6w
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/KfLGF0ibu6cLJiaicLnPCqYROg1Y8spzCyZGKg6ra9H53HCaejCGGjuXl9x9VZ0iaQQCSCzibMkS0iciaQpAntVMQibPgQ/640?wx_fmt=gif)
 
 **导读：**Python 数据工具箱涵盖从数据源到数据可视化的完整流程中涉及到的常用库、函数和外部工具。其中既有 Python 内置函数和标准库，又有第三方库和工具。
 
@@ -42,8 +39,6 @@ string.find('abcde','b')
 **01 文件读写**
 
 文件的读写包括常见的 txt、Excel、xml、二进制文件以及其他格式的数据文本，主要用于本地数据的读写。
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ07AvU5MjmTqUV0VowQA1YWdHPOicgGTlkDibU5gsGZvvAWicxOs3iapoOiaw/640?wx_fmt=jpeg)
 
 **1. open(name[, mode[, buffering]])**
 
@@ -175,8 +170,6 @@ string.find('abcde','b')
 
 网络抓取和解析用于从互联网中抓取信息，并对 HTML 对象进行处理，有关 xml 对象的解析和处理的库在 “01 文件读写” 中找到。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0tfxxHgslYC5t2kIUBNetlqmhWdibq0NHciaoY2fGh7oFicjonrPbFIRRA/640?wx_fmt=jpeg)
-
 **15. requests**
 
 *   **类型：**第三方库
@@ -243,8 +236,6 @@ string.find('abcde','b')
 **03 数据库连接**
 
 数据库连接可用于连接众多数据库以及访问通用数据库接口，可用于数据库维护、管理和增、删、改、查等日常操作。
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0cCpDeXrTNtGO6cV7wC8eMQqX8vnAhBW2jJpjAPDwMXiao3EmiaOlwIvA/640?wx_fmt=jpeg)
 
 **22. mysql-connector-python**
 
@@ -436,8 +427,6 @@ string.find('abcde','b')
 **04 数据清洗转换**
 
 数据清洗转换主用于数据正式应用之前的预处理工作。
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0ZYcLMN9veU7RnNHfMLqZjnvzCDCYceiaO5wpWZLPyCwajFLt2IYC1Yw/640?wx_fmt=jpeg)
 
 **43. frozenset([iterable])**
 
@@ -641,8 +630,6 @@ string.find('abcde','b')
 
 数据计算和统计分析主要用于数据探查、计算和初步数据分析等工作。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ08WEs7QXwW3z4ZIY5y5G4QqLjPf9j72faDKp42kbryMic3SL7Uia3NWIA/640?wx_fmt=jpeg)
-
 **65. numpy**
 
 *   **类型：**第三方库
@@ -764,8 +751,6 @@ string.find('abcde','b')
 
 自然语言处理和文本挖掘库主要用于以自然语言文本为对象的数据处理和建模。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ00HtbaYRRB7Xw0kicrf5RSc2qhSXwQvFOxuFMtnZ3pNBRqeMaYzrziajQ/640?wx_fmt=jpeg)
-
 **78. nltk**
 
 *   **类型：**第三方库
@@ -860,8 +845,6 @@ string.find('abcde','b')
 
 图像处理和视频处理主要适用于基于图像的操作、处理、分析和挖掘，如人脸识别、图像识别、目标跟踪、图像理解等。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ035HibnUHqvMribyTkRZrAKNeN1esARWEm8kJOR2IDR0sibjsfKzCnuKOg/640?wx_fmt=jpeg)
-
 **88. PIL/Pillow**
 
 *   **类型：**第三方库
@@ -919,8 +902,6 @@ string.find('abcde','b')
 **08 音频处理**
 
 音频处理主要适用于基于声音的处理、分析和建模，主要应用于语音识别、语音合成、语义理解等。
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0soiapezgZUgJjQAICoEEiarRQQRVvRCUfqtibFcBbSpwpzHSj69KRTfUA/640?wx_fmt=jpeg)
 
 **94. TimeSide**
 
@@ -1024,8 +1005,6 @@ string.find('abcde','b')
 **09 数据挖掘 / 机器学习 / 深度学习**
 
 数据挖掘、机器学习和深度学习等是 Python 进行数据建模和挖掘学习的核心模块。
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0IRIEicvw7sicdGYqx2pQF0ZCQcVGibHpiaH0A9JwWlFLQnaJRCAkjIp2dA/640?wx_fmt=jpeg)
 
 **105. Scikit-Learn**
 
@@ -1217,8 +1196,6 @@ string.find('abcde','b')
 
 交互学习和集成开发主要用来做 Python 开发、调试和集成之用，包括 Python 集成开发环境和 IDE。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cL8helpX0YXEfHiavWOLzXJ0TciavOqNVul2uiaz1dZ5Htxz0ep4exASh1Reer9Meb620r6AvTjPAYkw/640?wx_fmt=jpeg)
-
 **125. IPython/ Jupyter**
 
 *   **类型：**第三方库
@@ -1368,76 +1345,3 @@ string.find('abcde','b')
 关于作者：宋天龙，大数据技术专家，触脉咨询合伙人兼副总裁，前 Webtrekk 中国区技术和咨询负责人（Webtrekk，德国的在线数据分析服务提供商）。擅长数据挖掘、建模、分析与运营，精通端到端数据价值场景设计、业务需求转换、数据结构梳理、数据建模与学习以及数据工程交付。
 
 本文摘编自《Python 数据分析与数据化运营》（第 2 版），经出版方授权发布。
-
-延伸阅读《Python 数据分析与数据化运营》
-
-（第 2 版）  
-
-点击上图了解及购买
-
-转载请联系微信：DoctorData
-
-**推荐语：**这是一本将数据分析技术与数据使用场景深度结合的著作，从实战角度讲解了如何利用 Python 进行数据分析和数据化运营。本书与同类书大的不同在于，并不只有纯粹的关于数据分析技术和工具的讲解，而且还与数据使用场景深度结合，在业务上真正可指导落地。
-
-![](https://mmbiz.qpic.cn/mmbiz/cZV2hRpuAPiaJQXWGyC9wrUzIicibgXayrgibTYarT3A1yzttbtaO0JlV21wMqroGYT3QtPq2C7HMYsvicSB2p7dTBg/640?)
-
-**你想免费阅读这本书吗？下面告诉你操作方法！**
-
-**「大数据」内容合伙人之「鉴书小分队」上线啦！**
-
-最近，你都在读什么书？有哪些心得体会想要跟大家分享？
-
-数据叔最近搞了个大事——联合优质图书出版商机械工业出版社华章公司发起鉴书活动。
-
-简单说就是：**你可以免费读新书，你可以免费读新书的同时，顺手码一篇读书笔记就行。**详情请在大数据公众号后台对话框回复**合伙人**查看。
-
-![](https://mmbiz.qpic.cn/mmbiz/cZV2hRpuAPiaJQXWGyC9wrUzIicibgXayrgibTYarT3A1yzttbtaO0JlV21wMqroGYT3QtPq2C7HMYsvicSB2p7dTBg/640?)
-
-****有话要说👇****
-
-**Q:** **你常用哪些 Python 库和工具？**
-
-欢迎留言与大家分享
-
-**猜你想看👇**
-
-*   [最近都在谈的「私域流量」，究竟有没有前途？](http://mp.weixin.qq.com/s?__biz=MjM5ODE1NDYyMA==&mid=2653393529&idx=3&sn=64d9e211717fb3f1fb14e97b47cb0b2d&chksm=bd1c2a6a8a6ba37cba5449f3dcc926fc44623a67de74f3cb3eb14f3f5a2d2aca01f06061ac5c&scene=21#wechat_redirect)  
-    
-*   [一文读懂「中台」的前世今生](http://mp.weixin.qq.com/s?__biz=MjM5ODE1NDYyMA==&mid=2653393521&idx=1&sn=8d10b6335d2d7ed0a27cbbddc1d0c36b&chksm=bd1c2a628a6ba37486ff57d097dd807c1ab9cc3015133eb94260e7ccf16d7e312731420a867c&scene=21#wechat_redirect)  
-    
-*   [「最有用」的特殊大数据：一文看懂文本信息系统的概念框架及功能](http://mp.weixin.qq.com/s?__biz=MjM5ODE1NDYyMA==&mid=2653393463&idx=2&sn=5c0a9e0ff33c034ac1fcdc57225e26e2&chksm=bd1c2a248a6ba332c55a7fbb6f56781ff0d40378febc31dd300272e6aa0c45c7b516d3fd3e54&scene=21#wechat_redirect)  
-    
-*   [作品拍卖价碾压毕加索，没有灵魂的 AI 灵魂画手有怎样的未来？](http://mp.weixin.qq.com/s?__biz=MjM5ODE1NDYyMA==&mid=2653393421&idx=2&sn=9a740d39bd9377e87f07a5013607feed&chksm=bd1c2a1e8a6ba308d84599c021b4adca6f13f84bebf87fabab51409a41f30d455ea430a9af4d&scene=21#wechat_redirect)  
-    
-*   [一文看懂数据清洗：缺失值、异常值和重复值的处理](http://mp.weixin.qq.com/s?__biz=MjM5ODE1NDYyMA==&mid=2653393394&idx=2&sn=8586ad242c456840c07c4205300ca857&chksm=bd1c29e18a6ba0f7bad1ab565733aa8f213b6e01200c497ec0ef98829b0652da10dfc072d6c7&scene=21#wechat_redirect)
-    
-
-**更多精彩👇**
-
-在公众号对话框输入以下**关键词**
-
-查看更多优质内容！
-
-**PPT** | **报告** | **读书** | **书单** | **干货**
-
-**大数据** | **揭秘** | **Python** | **可视化**
-
-**AI** | **人工智能** | **5G** | **区块链**
-
-**机器学习** | **深度学习** | **神经网络**
-
-**合伙人**| **1024** | **段子** | **数学** | **高考**
-
-据统计，99% 的大咖都完成了这个神操作
-
-**👇**
-
-![](https://mmbiz.qpic.cn/mmbiz_png/KfLGF0ibu6cJmXkAITIpknZ8zcoh12627WuIN0F7w9mpOTDJkO1lU1flVPjb4NghlSK1h0NNl94SDR5sz2lzJBw/640?wx_fmt=png)
-
-觉得不错，请把这篇文章分享给你的朋友  
-
-转载 / 投稿请联系：baiyu@hzbook.com
-
-更多精彩，请在后台点击 “历史文章” 查看
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/KfLGF0ibu6cI6yiax4muuJvS6ywtkAXeVBHj0fiaQ9zOzAvFaEdy6LFmm6SCQSRMcvDu0gJCZlbIOC3gnnKXctkicg/640?wx_fmt=jpeg)

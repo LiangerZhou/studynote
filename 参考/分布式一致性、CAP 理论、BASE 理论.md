@@ -7,8 +7,6 @@
 
 在计算机科学领域，分布式一致性是一个相当重要且被广泛探索与论证问题，首先来看三种业务场景。
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoNke58aA0ZeS6IXUN9B4DvVDLiahqn8YrocLrXw4d3VoibpLNQ3YjoaDEDE3yZBmhGpwY9UIaq1hLw/640?wx_fmt=png)
-
 1、火车站售票
 
 假如说我们的终端用户是一位经常坐火车的旅行家，通常他是去车站的售票处购买车票，然后拿着车票去检票口，再坐上火车，开始一段美好的旅行 ---- 一切似乎都是那么和谐。
@@ -37,7 +35,6 @@
 
 但其实有过网购系统开发经验的工程师一定明白，在商品详情页上显示的那个库存量，通常不是该商品的真实库存量，只有在真正下单购买的时候，系统才会检查该商品的真实库存量。但是，谁在意呢？
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoNke58aA0ZeS6IXUN9B4Dv6WbTLUCpicTWiaiaq1v8cz6PMWL8qWGLwPP40xtA2MyvtgKyG2EG5DQdg/640?wx_fmt=png)
 
 问题的解读
 
@@ -93,8 +90,6 @@
 
 最终一致性是弱一致性的一个特例，系统会保证在一定时间内，能够达到一个数据一致的状态。这里之所以将最终一致性单独提出来，是因为它是弱一致性中非常推崇的一种一致性模型，也是业界在大型分布式系统的数据一致性上比较推崇的模型
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoNke58aA0ZeS6IXUN9B4DvEhiat5zRu912Bu81Yo1NANxKrF3SuWBjuhf75Ve2od4soYWiax1uUsVg/640?wx_fmt=png)
-
 分布式环境的各种问题
 
 
@@ -134,7 +129,6 @@
 
 节点故障则是分布式环境下另一个比较常见的问题，指的是组成分布式系统的服务器节点出现的宕机或 "僵死" 现象，通常根据经验来说，每个节点都有可能出现故障，并且每天都在发生
 
-![](https://mmbiz.qpic.cn/mmbiz_png/2LlmEpiamhyoNke58aA0ZeS6IXUN9B4DvhmS0JEMYNTXYgDWZuRWucibHkNxrypOvuj2phpUibADO51WIljTRNOFw/640?wx_fmt=png)
 
 分布式事务
 
