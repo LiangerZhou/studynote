@@ -1,4 +1,4 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://my.oschina.net/suzheworld/blog/2991071
+# FastDFS搭建
 
 FastDFS 是用 c 语言编写的一款开源的分布式文件系统。FastDFS 为互联网量身定制，充分考虑了冗余备份、负载均衡、线性扩容等机制，并注重高可用、高性能等指标，使用 FastDFS 很容易搭建一套高性能的文件服务器集群提供文件上传、下载等服务。
 
@@ -8,7 +8,7 @@ Tracker server 作用是负载均衡和调度，通过 Tracker server 在文件�
 
 Storage server 作用是文件存储，客户端上传的文件最终存储在 Storage 服务器上，Storageserver 没有实现自己的文件系统而是利用操作系统 的文件系统来管理文件。可以将 storage 称为存储服务器。
 
-![](https://oscimg.oschina.net/oscnet/64d3a09cfd91b322e8d42c8e591ac566dcc.jpg)
+![https://oscimg.oschina.net/oscnet/64d3a09cfd91b322e8d42c8e591ac566dcc.jpg](https://oscimg.oschina.net/oscnet/64d3a09cfd91b322e8d42c8e591ac566dcc.jpg)
 
 服务端两个角色：
 
@@ -18,60 +18,60 @@ Storage：实际保存文件 Storage 分为多个组，每个组之间保存的�
 
 组成员内部保存的内容是一样的，组成员的地位是一致的，没有主从的概念。
 
-1、拉取镜像
+## 1. 拉取镜像
 
-```
+```shell
 [root@VM_108_39_centos fastdfs]# docker pull delron/fastdfs
 Using default tag: latest
-Trying to pull repository docker.io/delron/fastdfs ... 
+Trying to pull repository docker.io/delron/fastdfs ...
 sha256:9583cb80170c153bc12615fd077fe364a8fd5a95194b7cf9a8a32d2c11f8a49d: Pulling from docker.io/delron/fastdfs
-469cfcc7a4b3: Pull complete 
-4b4f08bd0171: Pull complete 
-95eef9978b96: Pull complete 
-aff83d00c747: Pull complete 
-1e95dffa1075: Pull complete 
-f114184ac28c: Pull complete 
-649b2ad6afe2: Pull complete 
-8ab2127a38c5: Pull complete 
-4d12f9bd27c7: Pull complete 
-bfc05d82f0a6: Pull complete 
-76f2a6d84a19: Pull complete 
-89bd9c4e6fea: Pull complete 
-6c06548e40ac: Pull complete 
-11186700b494: Pull complete 
+469cfcc7a4b3: Pull complete
+4b4f08bd0171: Pull complete
+95eef9978b96: Pull complete
+aff83d00c747: Pull complete
+1e95dffa1075: Pull complete
+f114184ac28c: Pull complete
+649b2ad6afe2: Pull complete
+8ab2127a38c5: Pull complete
+4d12f9bd27c7: Pull complete
+bfc05d82f0a6: Pull complete
+76f2a6d84a19: Pull complete
+89bd9c4e6fea: Pull complete
+6c06548e40ac: Pull complete
+11186700b494: Pull complete
 Digest: sha256:9583cb80170c153bc12615fd077fe364a8fd5a95194b7cf9a8a32d2c11f8a49d
 Status: Downloaded newer image for docker.io/delron/fastdfs:latest
 
 ```
 
-2. 构建 tracker 容器：
+## 2. 构建 tracker 容器
 
-```
+```shell
 [root@VM_108_39_centos tracker]# docker run -d --network=host --name tracker -v /docker/fastdfs/tracker:/var/fdfs delron/fastdfs tracker
 
 ```
 
-3. 构建 storage 容器
+## 3. 构建 storage 容器
 
-```
+```shell
 docker run -d --network=host --name storage -e TRACKER_SERVER=192.168.1.56:22122 -v /docker/fastdfs/storage:/var/fdfs -e GROUP_NAME=group1 delron/fastdfs storage
 
 ```
 
 TRACKER_SERVER=192.168.1.56:22122 替换 192.168.1.56 为你的 ip
 
-4. 更改端口（默认的端口为 8888）
+## 4. 更改端口（默认的端口为 8888）
 
 进入容器：
 
-```
+```shell
 [root@VM_108_39_centos storage]# docker exec -it storage  /bin/bash
 
 ```
 
 修改 storage 服务的 http 端口为 91
 
-```
+```shell
 [root@VM_108_39_centos nginx-1.12.2]# vi /etc/fdfs/storage.conf
 ​
 # the port of the web server on this storage server
@@ -81,23 +81,22 @@ http.server_port=91
 
 修改 Nginx 监听的端口为 91：
 
-```
+```shell
 [root@VM_108_39_centos nginx-1.12.2]# vi /usr/local/nginx/conf/nginx.conf
 
 ```
 
-![](https://oscimg.oschina.net/oscnet/5c4c78ce1f9de2ec6aac9b6deaea17f624e.jpg)
+![https://oscimg.oschina.net/oscnet/5c4c78ce1f9de2ec6aac9b6deaea17f624e.jpg](https://oscimg.oschina.net/oscnet/5c4c78ce1f9de2ec6aac9b6deaea17f624e.jpg)
 
 5、重启 storage
 
-```
-[root@VM_108_39_centos storage]# docker restart storage 
+```shell
+[root@VM_108_39_centos storage]# docker restart storage
 ​
 storage
 ​
-[root@VM_108_39_centos storage]# 
+[root@VM_108_39_centos storage]#
 ​
-
 ```
 
 6、测试 (这里用的 springboot)
@@ -106,7 +105,7 @@ storage
 
 修改 application.yml, 将 192.168.1.56 替换成你的服务器 ip，如下
 
-```
+```shell
 server:
   port: 8082
 spring:
@@ -133,7 +132,7 @@ image:
 
 上传图片进行测试。
 
-![](https://oscimg.oschina.net/oscnet/d7ee7e9fb29232a9c8b56664b092675117c.jpg)
+![test](https://oscimg.oschina.net/oscnet/d7ee7e9fb29232a9c8b56664b092675117c.jpg)
 
 查看返回的图片地址：
 

@@ -253,7 +253,6 @@ public static void main(String[] args) throws ExecutionException, Interru
         Inc inc = tt.new Inc();
         Dec dec = tt.new Dec();
 
-
         Thread t1 = new Thread(inc);
         Thread t2 = new Thread(dec);
         Thread t3 = new Thread(inc);
@@ -262,7 +261,6 @@ public static void main(String[] args) throws ExecutionException, Interru
         t2.start();
         t3.start();
         t4.start();
-
     }
 
     private synchronized void inc() {
@@ -340,7 +338,6 @@ public static void main(String[] args) {
     executorService.shutdown();
 }
 
-
 ```
 
 * newFixedThreadPool：**所有任务只能使用固定大小的线程；**
@@ -376,7 +373,6 @@ public static void main(String[] args) {
     Thread thread = new Thread(new MyRunnable());
     thread.setDaemon(true);
 }
-
 
 ```
 
@@ -458,7 +454,6 @@ public class InterruptExample {
     }
 }
 
-
 ```
 
 ```java
@@ -469,7 +464,6 @@ public static void main(String[] args) throws InterruptedException {
     System.out.println("Main run");
 }
 
-
 ```
 
 ```java
@@ -479,7 +473,6 @@ java.lang.InterruptedException: sleep interrupted
     at InterruptExample.lambda$main$0(InterruptExample.java:5)
     at InterruptExample$$Lambda$1/713338599.run(Unknown Source)
     at java.lang.Thread.run(Thread.java:745)
-
 
 ```
 
@@ -493,9 +486,7 @@ interrupt 线程中断还有另外两个方法 (**检查该线程是否被中断
 
 如果一个线程的 run() 方法执行一个**无限循环（不属于阻塞、限期等待、非限期等待），例如 while（True）**，并且没有执行 sleep() 等会抛出 InterruptedException 的操作，那么调用线程的 interrupt() 方法就**无法使线程提前结束**。
 
-然而，
-
-**但是调用 interrupt() 方法会设置线程的中断标记，此时调用 interrupted() 方法会返回 true。因此可以在循环体中使用 interrupted() 方法来判断线程是否处于中断状态，从而提前结束线程。**
+然而，**但是调用 interrupt() 方法会设置线程的中断标记，此时调用 interrupted() 方法会返回 true。因此可以在循环体中使用 interrupted() 方法来判断线程是否处于中断状态，从而提前结束线程。**
 
 ```java
  Thread t1 = new Thread( new Runnable(){
@@ -534,7 +525,6 @@ public static void main(String[] args) {
     System.out.println("Main run");
 }
 
-
 ```
 
 ```java
@@ -556,7 +546,6 @@ Future<?> future = executorService.submit(() -> {
     // ..
 });
 future.cancel(true);
-
 
 ```
 
@@ -612,7 +601,6 @@ public void func () {
     }
 }
 
-
 ```
 
 它只作用于同一个对象，**如果调用两个不同对象上的同步代码块**，就不会进行同步。
@@ -623,7 +611,6 @@ public void func () {
 public synchronized void func () {
     // ...
 }
-
 
 ```
 
@@ -638,7 +625,6 @@ public void func() {
     }
 }
 
-
 ```
 
 **作用于整个类，也就是说两个线程调用同一个类的不同对象上的这种同步语句，也需要进行同步。**
@@ -649,7 +635,6 @@ public void func() {
 public synchronized static void fun() {
     // ...
 }
-
 
 ```
 
@@ -691,7 +676,6 @@ public static void main(String[] args) {
     executorService.execute(() -> lockExample.func());
     executorService.execute(() -> lockExample.func());
 }
-
 
 ```
 
@@ -834,7 +818,6 @@ public class AwaitSignalExample {
     }
 }
 
-
 ```
 
 ```java
@@ -844,7 +827,6 @@ public static void main(String[] args) {
     executorService.execute(() -> example.after());
     executorService.execute(() -> example.before());
 }
-
 
 ```
 
@@ -979,7 +961,6 @@ public class CyclicBarrierExample {
 }
 before..before..before..before..before..before..before..before..before..before..after..after..after..after..after..after..after..after..after..after..
 
-
 ```
 
 #### Semaphore
@@ -1016,7 +997,6 @@ public class SemaphoreExample {
         executorService.shutdown();
     }
 }
-
 
 ```
 
@@ -1122,7 +1102,6 @@ public class ProducerConsumer {
     }
 }
 
-
 ```
 
 ```java
@@ -1141,12 +1120,10 @@ public static void main(String[] args) {
     }
 }
 
-
 ```
 
 ```java
 produce..produce..consume..consume..produce..consume..produce..consume..produce..consume..
-
 
 ```
 
@@ -1210,7 +1187,6 @@ public class ForkJoinExample extends RecursiveTask<Integer> {
     }
 }
 
-
 ```
 
 ```java
@@ -1220,7 +1196,6 @@ public static void main(String[] args) throws ExecutionException, Interru
     Future result = forkJoinPool.submit(example);
     System.out.println(result.get());
 }
-
 
 ```
 
@@ -1233,31 +1208,15 @@ public class ForkJoinPool extends AbstractExecutorService
 
 ForkJoinPool 实现了工作窃取算法来提高 CPU 的利用率。每个线程都维护了一个双端队列，用来存储需要执行的任务。工作窃取算法允许空闲的线程从其它线程的双端队列中窃取一个任务来执行。**窃取的任务必须是最晚的任务，避免和队列所属线程发生竞争**。例如下图中，Thread2 从 Thread1 的队列中拿出最晚的 Task1 任务，Thread1 会拿出 Task2 来执行，这样就避免发生竞争。**但是如果队列中只有一个任务时还是会发生竞争。**
 
-![https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYKtkxtWsWRBHyvibbuLwjoLVZicYnWuCb1hKwE9OtFic1BQDcia4zrv8ND8e19gQAZFf7ssB41f2vGGw/640?wx_fmt=png](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYKtkxtWsWRBHyvibbuLwjoLVZicYnWuCb1hKwE9OtFic1BQDcia4zrv8ND8e19gQAZFf7ssB41f2vGGw/640?wx_fmt=png)在这里插入图片描述
+![https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYKtkxtWsWRBHyvibbuLwjoLVZicYnWuCb1hKwE9OtFic1BQDcia4zrv8ND8e19gQAZFf7ssB41f2vGGw/640?wx_fmt=png](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYKtkxtWsWRBHyvibbuLwjoLVZicYnWuCb1hKwE9OtFic1BQDcia4zrv8ND8e19gQAZFf7ssB41f2vGGw/640?wx_fmt=png)
 
-
-
-
-文章目录
-====
-
-*   线程不安全示例
-*   Java 内存模型
-*   ThreadLocal/Volatile/Synchronized/Atomic 横向对比
-*   线程安全
-*   锁优化
-*   多线程开发良好的实践
-*   补充经典并发集合和同步集合参考
-*   Java 线程锁
-
-线程不安全示例
-=======
+## 8. 线程不安全示例
 
 如果多个线程对同一个共享数据进行访问而不采取同步操作的话，那么操作的结果是不一致的。
 
 以下代码演示了 1000 个线程同时对 cnt 执行自增操作，操作结束之后它的值有可能小于 1000。
 
-```
+```java
 public class ThreadUnsafeExample {
 
     private int cnt = 0;
@@ -1271,10 +1230,9 @@ public class ThreadUnsafeExample {
     }
 }
 
-
 ```
 
-```
+```java
 public static void main(String[] args) throws InterruptedException {
     final int threadSize = 1000;
     ThreadUnsafeExample example = new ThreadUnsafeExample();
@@ -1291,55 +1249,49 @@ public static void main(String[] args) throws InterruptedException {
     System.out.println(example.get());
 }
 
-
 ```
 
-```
+```java
 997
 
-
 ```
 
-Java 内存模型
-=========
+## 9. Java 内存模型
 
 **Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。**
 
-主内存与工作内存
---------
+### 1. 主内存与工作内存
 
 处理器上的寄存器的读写的速度比内存快几个数量级，为了解决这种速度矛盾，在它们之间加入了高速缓存。
 
 加入高速缓存带来了一个新的问题：缓存一致性。如果多个缓存共享同一块主内存区域，那么多个缓存的数据可能会不一致，需要一些协议来解决这个问题。
 
-![](https://img-blog.csdnimg.cn/20190201144151328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
+![内存](https://img-blog.csdnimg.cn/20190201144151328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
 所有的变量都存储在主内存中，每个线程还有自己的工作内存，工作内存存储在高速缓存或者寄存器中，保存了该线程使用的变量的主内存副本拷贝。
 
 线程只能直接操作工作内存中的变量，不同线程之间的变量值传递需要通过主内存来完成。
 
-![](https://img-blog.csdnimg.cn/20190201144158698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
+![内存](https://img-blog.csdnimg.cn/20190201144158698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
-内存间交互操作
--------
+### 2. 内存间交互操作
 
 Java 内存模型定义了 8 个操作来完成**主内存和工作内存的交互操作**。
 
-![](https://img-blog.csdnimg.cn/2019020114420688.png)
+![内存交互](https://img-blog.csdnimg.cn/2019020114420688.png)
 
-*   read：把一个变量的值从主内存传输到工作内存中
-*   load：在 read 之后执行，把 read 得到的值放入工作内存的变量副本中
-*   use：把工作内存中一个变量的值传递给执行引擎
-*   assign：把一个从执行引擎接收到的值赋给工作内存的变量
-*   store：把工作内存的一个变量的值传送到主内存中
-*   write：在 store 之后执行，把 store 得到的值放入主内存的变量中
-*   lock：作用于主内存的变量
-*   unlock
+* read：把一个变量的值从主内存传输到工作内存中
+* load：在 read 之后执行，把 read 得到的值放入工作内存的变量副本中
+* use：把工作内存中一个变量的值传递给执行引擎
+* assign：把一个从执行引擎接收到的值赋给工作内存的变量
+* store：把工作内存的一个变量的值传送到主内存中
+* write：在 store 之后执行，把 store 得到的值放入主内存的变量中
+* lock：作用于主内存的变量
+* unlock
 
-内存模型三大特性
---------
+### 3. 内存模型三大特性
 
-### 1. 原子性
+#### 1. 原子性
 
 Java 内存模型保证了 read、load、use、assign、store、write、lock 和 unlock 操作具有原子性
 
@@ -1347,13 +1299,13 @@ Java 内存模型保证了 read、load、use、assign、store、write、lock 和
 
 有一个错误认识就是，int 等原子性的类型在多线程环境中不会出现线程安全问题。前面的线程不安全示例代码中，cnt 属于 int 类型变量，1000 个线程对它进行自增操作之后，得到的值为 997 而不是 1000。
 
-#### 原子类
+##### 原子类
 
-![](https://img-blog.csdnimg.cn/20190201144229174.png)
+![原子类](https://img-blog.csdnimg.cn/20190201144229174.png)
 
 使用 AtomicInteger 重写之前线程不安全的代码之后得到以下线程安全实现：
 
-```
+```java
 public class AtomicExample {
     private AtomicInteger cnt = new AtomicInteger();
 
@@ -1366,10 +1318,9 @@ public class AtomicExample {
     }
 }
 
-
 ```
 
-```
+```java
 public static void main(String[] args) throws InterruptedException {
     final int threadSize = 1000;
     AtomicExample example = new AtomicExample(); // 只修改这条语句
@@ -1386,20 +1337,18 @@ public static void main(String[] args) throws InterruptedException {
     System.out.println(example.get());
 }
 
-
 ```
 
-```
+```java
 1000
 
-
 ```
 
-#### synchronized
+##### synchronized
 
 除了使用原子类之外，也可以使用 synchronized 互斥锁来保证操作的原子性。它对应的内存间交互操作为：lock 和 unlock，在虚拟机实现上对应的字节码指令为 monitorenter 和 monitorexit。
 
-```
+```java
 
 public class AtomicSynchronizedExample {
     private int cnt = 0;
@@ -1413,11 +1362,9 @@ public class AtomicSynchronizedExample {
     }
 }
 
-
 ```
 
-```
-
+```java
 public static void main(String[] args) throws InterruptedException {
     final int threadSize = 1000;
     AtomicSynchronizedExample example = new AtomicSynchronizedExample();
@@ -1434,16 +1381,14 @@ public static void main(String[] args) throws InterruptedException {
     System.out.println(example.get());
 }
 
-
 ```
 
-```
+```java
 1000
 
-
 ```
 
-### 2. 可见性
+#### 2. 可见性
 
 **可见性指当一个线程修改了共享变量的值，其它线程能够立即得知这个修改**。
 
@@ -1451,30 +1396,26 @@ Java 内存模型是通过**在变量修改后将新值同步回主内存**，**
 
 主要有有三种实现可见性的方式：
 
-*   **volatile**：仅仅用来保证该变量对所有线程的可见性，但不保证原子性。
-*   **synchronized，对一个变量执行 unlock 操作之前，必须把变量值同步回主内存。**
-*   **final**，被 final 关键字修饰的字段在构造器中一旦初始化完成，并且没有发生 this 逃逸（其它线程通过 this 引用访问到初始化了一半的对象），那么其它线程就能看见 final 字段的值。
+* **volatile**：仅仅用来保证该变量对所有线程的可见性，但不保证原子性。
+* **synchronized，对一个变量执行 unlock 操作之前，必须把变量值同步回主内存。**
+* **final**，被 final 关键字修饰的字段在构造器中一旦初始化完成，并且没有发生 this 逃逸（其它线程通过 this 引用访问到初始化了一半的对象），那么其它线程就能看见 final 字段的值。
 
-### 3. 有序性
+#### 3. 有序性
 
 有序性是指：**在本线程内观察，所有操作都是有序的**。**在一个线程观察另一个线程，所有操作都是无序的，无序是因为发生了指令重排序。**
 
 在 Java 内存模型中，允许编译器和处理器对指令进行重排序，重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。
 
-*   **volatile 关键字通过添加内存屏障的方式来禁止指令重排，即重排序时不能把后面的指令放到内存屏障之前。**
-    
-*   **可以通过 synchronized 来保证有序性，它保证每个时刻只有一个线程执行同步代码，相当于是让线程顺序执行同步代码。**
-    
+* **volatile 关键字通过添加内存屏障的方式来禁止指令重排，即重排序时不能把后面的指令放到内存屏障之前。**
 
-#### happens-before
+* **可以通过 synchronized 来保证有序性，它保证每个时刻只有一个线程执行同步代码，相当于是让线程顺序执行同步代码。**
+
+##### happens-before
 
 [https://blog.csdn.net/qq_30137611/article/details/78146864](https://blog.csdn.net/qq_30137611/article/details/78146864)
 
 **happens-before 是判断数据是否存在竞争、线程是否安全的重要依据**
-
-定义：
-
-如果操作 A happens-before 于 操作 B，那么就可以确定，操作 B 执行完之后，j 的值一定为 1；因为 happens-before 关系可以向程序员保证：在操作 B 执行之前，操作 A 的执行后的影响 [或者说结果]（修改 i 的值）操作 B 是可以观察到的 [或者说可见的]
+定义：如果操作 A happens-before 于 操作 B，那么就可以确定，操作 B 执行完之后，j 的值一定为 1；因为 happens-before 关系可以向程序员保证：在操作 B 执行之前，操作 A 的执行后的影响 [或者说结果]（修改 i 的值）操作 B 是可以观察到的 [或者说可见的]
 
 这里列举几个常见的 Java“天然的”happens-before 关系
 
@@ -1487,24 +1428,23 @@ Java 内存模型是通过**在变量修改后将新值同步回主内存**，**
 
 ④ 传递性：如果 A happens-before B, 且 B happens-before C, 那么 A happens-before C
 
-![](https://img-blog.csdnimg.cn/20190201144253282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
+![happens-before](https://img-blog.csdnimg.cn/20190201144253282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
 #### 总结
 
-*   保证原子性的操作：
-    *   read、load、assign、use、store 和 write（自身具有原子性）
-    *   原子类
-    *   synchronized 锁
-*   保证可见性：
-    *   volatile
-    *   synchronized 锁
-    *   final
-*   保证有序性 (重排序导致无序) 的操作：
-    *   volatile
-    *   synchronized 锁
+* 保证原子性的操作：
+  * read、load、assign、use、store 和 write（自身具有原子性）
+  * 原子类
+  * synchronized 锁
+* 保证可见性：
+  * volatile
+  * synchronized 锁
+  * final
+* 保证有序性 (重排序导致无序) 的操作：
+  * volatile
+  * synchronized 锁
 
-先行发生原则
-------
+## 10. 先行发生原则
 
 上面提到了可以用 volatile 和 synchronized 来保证有序性。**除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。**
 
@@ -1558,50 +1498,39 @@ Thread 对象的结束先行发生于 join() 方法返回。
 
 如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。
 
-ThreadLocal/Volatile/Synchronized/Atomic 横向对比
-=============================================
+## 11. ThreadLocal/Volatile/Synchronized/Atomic 横向对比
 
 [https://blog.csdn.net/u010687392/article/details/50549236](https://blog.csdn.net/u010687392/article/details/50549236)
 
-Atomic 原子性
-----------
+## 12. Atomic 原子性
 
-### 内部实现
+内部实现**采用 Lock-Free 算法替代锁，加上原子操作指令实现并发情况下资源的安全、完整、一致性**，而关于 Lock-Free 算法，则是一种新的策略替代锁来保证资源在并发时的完整性的，Lock-Free 的实现有三步：
 
-**采用 Lock-Free 算法替代锁，加上原子操作指令实现并发情况下资源的安全、完整、一致性**
-
-而关于 Lock-Free 算法，则是一种新的策略替代锁来保证资源在并发时的完整性的，Lock-Free 的实现有三步：
-
-```
-1
-2
-3
-1、循环（for(;;)、while） 
-2、CAS（CompareAndSet） 
+```txt
+1、循环（for(;;)、while）
+2、CAS（CompareAndSet）
 3、回退（return、break）
 
-
 ```
 
-volatile 可见性 有序性
-----------------
+## 13. volatile 可见性 有序性
 
 [https://www.jianshu.com/p/195ae7c77afe](https://www.jianshu.com/p/195ae7c77afe)
-
 **通过关键字 sychronize 可以防止多个线程进入同一段代码，在某些特定场景中，volatile 相当于一个轻量级的 sychronize，因为不会引起线程的上下文切换**
 
-### 为何具有可见性
+为何具有可见性
 
-*   对于普通变量
-    
-    *   读操作会优先读取工作内存的数据，如果工作内存中不存在，则**从主内存中拷贝一份数据到工作内存中**；
-    *   写操作只会修改工作内存的副本数据，这种情况下，**其它线程就无法读取变量的最新值**。
-*   对于 volatile 变量
-    
-    *   **读操作**时 JMM 会把**工作内存中对应的值设为无效**，**要求线程从主内存中读取数据**；
-    *   **写操作**时 JMM 会把**工作内存中对应的数据刷新到主内存中**，这种情况下，其它线程就可以读取变量的最新值。
+* 对于普通变量
 
-### 为何具有有序性（内存屏障）
+  * 读操作会优先读取工作内存的数据，如果工作内存中不存在，则**从主内存中拷贝一份数据到工作内存中**；
+  * 写操作只会修改工作内存的副本数据，这种情况下，**其它线程就无法读取变量的最新值**。
+
+* 对于 volatile 变量
+
+  * **读操作**时 JMM 会把**工作内存中对应的值设为无效**，**要求线程从主内存中读取数据**；
+  * **写操作**时 JMM 会把**工作内存中对应的数据刷新到主内存中**，这种情况下，其它线程就可以读取变量的最新值。
+
+为何具有有序性（内存屏障）
 
 内存屏障，又称内存栅栏，是一个 CPU 指令。在程序运行时，为了提高执行性能，编译器和处理器会对指令进行重排序
 
@@ -1611,12 +1540,11 @@ volatile 可见性 有序性
 
 一般来说，volatile 大多**用于标志位上 (判断操作),**
 
-*   修改变量时**不依赖变量的当前值** (因为 volatile 是不保证原子性的)
-*   该变量不会纳入到不变性条件中 (**该变量是可变的**)
-*   在访问变量的时候**不需要加锁** (加锁就没必要使用 volatile 这种轻量级同步机制了)
+* 修改变量时**不依赖变量的当前值** (因为 volatile 是不保证原子性的)
+* 该变量不会纳入到不变性条件中 (**该变量是可变的**)
+* 在访问变量的时候**不需要加锁** (加锁就没必要使用 volatile 这种轻量级同步机制了)
 
-synchronized 全能
----------------
+## 14. synchronized 全能
 
 但是由于操作上的优势，只需要简单的声明一下即可，而且**被它声明的代码块也是具有操作的原子性。**
 
