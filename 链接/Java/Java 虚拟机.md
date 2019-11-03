@@ -21,18 +21,15 @@ https://blog.csdn.net/o_nianchenzi_o/article/details/78629929
 
 可以通过 -Xss 这个虚拟机参数来指定一个程序的 Java 虚拟机栈内存大小：
 
-```
-1java -Xss=512M HackTheJava
-
-
+```java
+java -Xss=512M HackTheJava
 ```
 
 该区域可能抛出以下异常：
 
-*   当线程请求的栈深度超过最大值，会抛出 StackOverflowError 异常；
-    
-*   栈进行动态扩展时如果无法申请到足够内存，会抛出 OutOfMemoryError 异常。
-    
+* 当线程请求的栈深度超过最大值，会抛出 StackOverflowError 异常；
+
+* 栈进行动态扩展时如果无法申请到足够内存，会抛出 OutOfMemoryError 异常。
 
 本地方法栈
 -----
@@ -42,25 +39,21 @@ https://blog.csdn.net/o_nianchenzi_o/article/details/78629929
 堆
 -
 
-所有对象实例都在这里分配内存。
+几乎所有对象实例都在这里分配内存。
 
 因此虚拟机把 Java 堆分成以下三块：
 
-*   新生代（Young Generation）
-    
-*   老年代（Old Generation）
-    
-*   永久代（Permanent Generation）（JDK1.7 永久代才在堆中，1.6 中被称为运行时常量池。JDK 1.8 之后，取消了永久代, 变为虚拟机之外的元空间）
-    
+* 新生代（Young Generation）
 
+* 老年代（Old Generation）
+
+* 永久代（Permanent Generation）（JDK1.7 永久代才在堆中，1.6 中被称为运行时常量池。JDK 1.8 之后，取消了永久代, 变为虚拟机之外的元空间）
 **关于元空间详细说明，请看 Java - 基础面试题整合版 - java8 的新特性**
 
 可以通过 -Xms 和 -Xmx 两个虚拟机参数来指定一个程序的 Java 堆内存大小，第一个参数设置初始值，第二个参数设置最大值。
 
-```
-1java -Xms=1M -Xmx=2M HackTheJava
-
-
+```java
+java -Xms=1M -Xmx=2M HackTheJava
 ```
 
 默认空余堆内存**小于 40% 时**，JVM 就会增大堆直到 - Xmx 的最大限制；
@@ -154,10 +147,8 @@ Java 具有四种强度不同的引用类型。
 
 **使用 new 一个新对象的方式来创建强引用。**
 
-```
-1Object obj = new Object();
-
-
+```java
+Object obj = new Object();
 ```
 
 **（二）软引用**
@@ -258,7 +249,7 @@ HotSpot 虚拟机的 Eden 和 Survivor 的大小比例默认为 8:1（8:1:1）�
 垃圾收集器
 -----
 
-![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYylqXTG2tbHGVf4L113tZdNvPicu9IbrsXrBX3AetmcJdnQic4UM8tQ0EftRgS3P3HvxYPks8CtgXQ/640?wx_fmt=png)在这里插入图片描述
+![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rYylqXTG2tbHGVf4L113tZdNvPicu9IbrsXrBX3AetmcJdnQic4UM8tQ0EftRgS3P3HvxYPks8CtgXQ/640?wx_fmt=png)
 
 以上是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。
 
@@ -554,8 +545,7 @@ JMX 是获取 JVM 内部运行时状态信息 的标准 API. 可以编写程序�
 #### GC 日志 (GC logs)
 
 
-类加载机制
-=====
+## 类加载机制
 
 类是在运行期间动态加载的。
 
@@ -564,25 +554,23 @@ JMX 是获取 JVM 内部运行时状态信息 的标准 API. 可以编写程序�
 
 包括以下 7 个阶段：
 
-*   **加载（Loading）**
-    
-*   **验证（Verification）**
-    
-*   **准备（Preparation）**
-    
-*   **解析（Resolution）**
-    
-*   **初始化（Initialization）**
-    
-*   使用（Using）
-    
-*   卸载（Unloading）
-    
+* **加载（Loading）**
+
+* **验证（Verification）**
+
+* **准备（Preparation）**
+
+* **解析（Resolution）**
+
+* **初始化（Initialization）**
+
+* 使用（Using）
+
+* 卸载（Unloading）
 
 **其中解析过程在某些情况下可以在初始化阶段之后再开始，这是为了支持 Java 的动态绑定。**
 
-类加载过程
------
+## 类加载过程
 
 包含了加载、验证、准备、解析和初始化这 5 个阶段。
 
@@ -592,23 +580,21 @@ JMX 是获取 JVM 内部运行时状态信息 的标准 API. 可以编写程序�
 
 加载过程完成以下三件事：
 
-*   通过一个类的全限定名来**获取定义此类的二进制字节流。**
-    
-*   将这个字节流所代表的静态存储结构**转化为方法区的运行时存储结构。**
-    
-*   在内存中生成一个代表这个类的 Class 对象，作为方法区这个类的各种数据的访问入口。
-    
+* 通过一个类的全限定名来**获取定义此类的二进制字节流。**
+
+* 将这个字节流所代表的静态存储结构**转化为方法区的运行时存储结构。**
+
+* 在内存中生成一个代表这个类的 Class 对象，作为方法区这个类的各种数据的访问入口。
 
 其中二进制字节流可以从以下方式中获取：
 
-*   从 ZIP 包读取，成为 JAR、EAR、WAR 格式的基础。
-    
-*   从网络中获取，最典型的应用是 Applet。
-    
-*   运行时计算生成，例如动态代理技术，在 java.lang.reflect.Proxy 使用 ProxyGenerator.generateProxyClass 的代理类的二进制字节流。
-    
-*   由其他文件生成，例如由 JSP 文件生成对应的 Class 类。
-    
+* 从 ZIP 包读取，成为 JAR、EAR、WAR 格式的基础。
+
+* 从网络中获取，最典型的应用是 Applet。
+
+* 运行时计算生成，例如动态代理技术，在 java.lang.reflect.Proxy 使用 ProxyGenerator.generateProxyClass 的代理类的二进制字节流。
+
+* 由其他文件生成，例如由 JSP 文件生成对应的 Class 类。
 
 ### 2. 验证
 
@@ -622,18 +608,14 @@ JMX 是获取 JVM 内部运行时状态信息 的标准 API. 可以编写程序�
 
 > 初始值一般为 0 值，例如下面的类变量 value 被初始化为 0 而不是 123。
 
-```
+```java
 public static int value = 123;
-
-
 ```
 
 > 如果类变量是常量，那么会按照表达式来进行初始化，而不是赋值为 0。
 
-```
+```java
 public static final int value = 123;
-
-
 ```
 
 ### 4. 解析
@@ -651,9 +633,8 @@ public static final int value = 123;
 <clinit>() 方法具有以下特点：
 
 *   是由编译器自动收集类中所有类变量的赋值动作和静态语句块中的语句合并产生的，编译器收集的顺序由语句在源文件中出现的顺序决定。特别注意的是，静态语句块只能访问到定义在它之前的类变量，定义在它之后的类变量只能赋值，不能访问。例如以下代码：
-    
 
-```
+```java
 public class Test {
     static {
         i = 0;                // 给变量赋值可以正常编译通过
@@ -661,8 +642,6 @@ public class Test {
     }
     static int i = 1;
 }
-
-
 ```
 
 *   与类的构造函数（或者说实例构造器 <init>()）不同，不需要显式的调用父类的构造器。虚拟机会自动保证在子类的 <clinit>() 方法运行之前，父类的 <clinit>() 方法已经执行结束。因此虚拟机中第一个执行 <clinit>() 方法的类肯定为 java.lang.Object。

@@ -37,7 +37,7 @@ JAVA 反射机制是在运行状态中，对于任意一个类，都能够知道
 1、获取 Class 对象的三种方式
 ------------------
 
-### 1.1 Object ——> getClass();  
+1.1 Object ——> getClass();  
 1.2 任何数据类型（包括基本数据类型）都有一个 “静态” 的 class 属性  
 1.3 通过 Class 类的静态方法：forName（String  className）(常用)
 
