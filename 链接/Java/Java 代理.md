@@ -556,6 +556,8 @@ class com.cglib.UserDao$$EnhancerByCGLIB$$552188b6
 
 ## 六、相关资料
 
+1. [深入剖析动态代理--性能比较](https://blog.csdn.net/kingson_wu/article/details/50864637)
+
 代理模式相关知识
 
 * [代理模式及 Java 实现动态代理](http://www.jianshu.com/p/6f6bb2f0ece9)
