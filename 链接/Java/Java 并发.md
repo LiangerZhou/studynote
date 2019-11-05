@@ -834,7 +834,7 @@ after
 
 ```
 
-## 7. J.U.C
+## 7. J.U.C（java.util.concurrent）
 
 ### 1. AQS
 
@@ -1428,7 +1428,7 @@ Java 内存模型是通过**在变量修改后将新值同步回主内存**，**
 
 ![happens-before](https://img-blog.csdnimg.cn/20190201144253282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
-#### 总结
+#### 4.总结
 
 - 保证原子性的操作：
   - read、load、assign、use、store 和 write（自身具有原子性）
@@ -1564,7 +1564,7 @@ ThreadLocal 提供了线程的局部变量，每个线程都可以通过 set() �
 - 调用 ThreadLocal 的 get() 方法时，实际上就是往 ThreadLocalMap 获取值，key 是 ThreadLocal 对象
 - **ThreadLocal 本身并不存储值，它只是作为一个 key 来让线程从 ThreadLocalMap 获取 value**。
 
-![](https://img-blog.csdnimg.cn/20190201144305647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
+![threadlocal](https://img-blog.csdnimg.cn/20190201144305647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
 ### 内存泄漏
 
@@ -1595,32 +1595,29 @@ threadLocal 能够实现当前线程的操作都是用同一个 Connection，保
 
 4、对于 ThreadLocal 的出现，并不是解决多线程资源共享的问题，而是用来提供线程内的局部变量，省去参数传递这个不必要的麻烦，ThreadLocal 采用了 “以空间换时间” 的方式：**访问并行化，对象独享化**。ThreadLocal 是为每一个线程都提供了一份独有的变量，各个线程互不影响。
 
-线程安全类
-=====
+## 15. 线程安全类
 
 > 等待 IO 的方式：阻塞，非阻塞
-> 
 > 获得通知的方式：异步，非异步
 
 多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。
 
 **线程安全有以下几种实现方式：**
 
-不可变
----
+### 不可变
 
 不可变（Immutable）的对象一定是线程安全的，不需要再采取任何的线程安全保障措施。只要一个不可变的对象被正确地构建出来，永远也不会看到它在多个线程之中处于不一致的状态。多线程环境下，应当尽量使对象成为不可变，来满足线程安全。
 
 不可变的类型：
 
-*   final 关键字修饰的基本数据类型
-*   String
-*   枚举类型
-*   Number 部分子类，如 Long 和 Double 等数值包装类型，BigInteger 和 BigDecimal 等大数据类型。但同为 Number 的原子类 AtomicInteger 和 AtomicLong 则是可变的。
+- final 关键字修饰的基本数据类型
+- String
+- 枚举类型
+- Number 部分子类，如 Long 和 Double 等数值包装类型，BigInteger 和 BigDecimal 等大数据类型。但同为 Number 的原子类 AtomicInteger 和 AtomicLong 则是可变的。
 
 对于集合类型，可以使用 Collections.unmodifiableXXX() 方法来获取一个不可变的集合。
 
-```
+```java
 public class ImmutableExample {
     public static void main(String[] args) {
         Map<String, Integer> map = new HashMap<>();
@@ -1629,10 +1626,9 @@ public class ImmutableExample {
     }
 }
 
-
 ```
 
-```
+```java
 Exception in thread "main" java.lang.UnsupportedOperationException
     at java.util.Collections$UnmodifiableMap.put(Collections.java:1457)
     at ImmutableExample.main(ImmutableExample.java:9)
@@ -1642,7 +1638,7 @@ Exception in thread "main" java.lang.UnsupportedOperationException
 
 Collections.unmodifiableXXX() 先对原始的集合进行拷贝，需要对集合进行修改的方法都直接抛出异常。
 
-```
+```java
 public V put(K key, V value) {
     throw new UnsupportedOperationException();
 }
@@ -1650,13 +1646,11 @@ public V put(K key, V value) {
 
 ```
 
-互斥同步
-----
+## 16. 互斥同步
 
 synchronized 和 ReentrantLock。
 
-非阻塞同步
------
+### 非阻塞同步
 
 互斥同步最主要的问题就是进行线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步（Blocking Synchronization）。
 
@@ -1672,9 +1666,9 @@ synchronized 和 ReentrantLock。
 
 CAS 指令需要有 3 个操作数，分别是：
 
-*   内存位置（在 Java 中可以简单理解为变量的内存地址，用 V 表示）
-*   旧的预期值（用 A 表示）
-*   新值（用 B 表示）。
+- 内存位置（在 Java 中可以简单理解为变量的内存地址，用 V 表示）
+- 旧的预期值（用 A 表示）
+- 新值（用 B 表示）。
 
 **当且仅当预期值 A 和内存值 V 相同时，将内存值 V 修改为 B，否则什么都不做。**
 
@@ -1690,7 +1684,7 @@ J.U.C 包里面的整数原子类 AtomicInteger 的方法调用了 Unsafe 类的
 
 以下代码使用了 AtomicInteger 执行了自增的操作。
 
-```
+```java
 private AtomicInteger cnt = new AtomicInteger();
 
 public void add() {
@@ -1702,7 +1696,7 @@ public void add() {
 
 以下代码是 incrementAndGet() 的源码，它调用了 Unsafe 的 getAndAddInt() 。
 
-```
+```java
 public final int incrementAndGet() {
     return unsafe.getAndAddInt(this, valueOffset, 1) + 1;
 }
@@ -1714,7 +1708,7 @@ public final int incrementAndGet() {
 
 可以看到 getAndAddInt() 在一个循环中进行，发生冲突的做法是不断的进行重试。
 
-```
+```java
 public final int getAndAddInt(Object var1, long var2, int var4) {
     int var5;
     do {
@@ -1724,7 +1718,6 @@ public final int getAndAddInt(Object var1, long var2, int var4) {
     return var5;
 }
 
-
 ```
 
 ### 3. ABA
@@ -1733,8 +1726,7 @@ public final int getAndAddInt(Object var1, long var2, int var4) {
 
 J.U.C 包提供了一个带有标记的原子引用类 “AtomicStampedReference” 来解决这个问题，**它可以通过控制变量值的版本来保证 CAS 的正确性**。大部分情况下 ABA 问题不会影响程序并发的正确性，如果需要解决 ABA 问题，改用传统的互斥同步可能会比原子类更高效。
 
-无同步方案
------
+## 17. 无同步方案
 
 要保证线程安全，并不是一定就要进行同步。如果一个方法本来就不涉及共享数据，那它自然就无须任何同步措施去保证正确性。
 
@@ -1742,7 +1734,7 @@ J.U.C 包提供了一个带有标记的原子引用类 “AtomicStampedReference
 
 多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为局部变量存储在虚拟机栈中，属于线程私有的。
 
-```
+```java
 public class StackClosedExample {
     public void add100() {
         int cnt = 0;
@@ -1753,10 +1745,9 @@ public class StackClosedExample {
     }
 }
 
-
 ```
 
-```
+```java
 public static void main(String[] args) {
     StackClosedExample example = new StackClosedExample();
     ExecutorService executorService = Executors.newCachedThreadPool();
@@ -1765,14 +1756,11 @@ public static void main(String[] args) {
     executorService.shutdown();
 }
 
-
 ```
 
-```
+```java
 100
 100
-
-
 ```
 
 ### 2. 线程本地存储（Thread Local Storage）
@@ -1785,7 +1773,7 @@ public static void main(String[] args) {
 
 对于以下代码，thread1 中设置 threadLocal 为 1，而 thread2 设置 threadLocal 为 2。过了一段时间之后，thread1 读取 threadLocal 依然是 1，不受 thread2 的影响。
 
-```
+```java
 public class ThreadLocalExample {
     public static void main(String[] args) {
         ThreadLocal threadLocal = new ThreadLocal();
@@ -1808,18 +1796,15 @@ public class ThreadLocalExample {
     }
 }
 
-
 ```
 
-```
+```java
 1
-
-
 ```
 
 为了理解 ThreadLocal，先看以下代码：
 
-```
+```java
 public class ThreadLocalExample1 {
     public static void main(String[] args) {
         ThreadLocal threadLocal1 = new ThreadLocal();
@@ -1837,22 +1822,20 @@ public class ThreadLocalExample1 {
     }
 }
 
-
 ```
 
 每个 Thread 都有一个 ThreadLocal.ThreadLocalMap 对象。
 
-```
+```java
 /* ThreadLocal values pertaining to this thread. This map is maintained
  * by the ThreadLocal class. */
 ThreadLocal.ThreadLocalMap threadLocals = null;
-
 
 ```
 
 当调用一个 ThreadLocal 的 set(T value) 方法时，先得到当前线程的 ThreadLocalMap 对象，然后将 ThreadLocal->value 键值对插入到该 Map 中。
 
-```
+```java
 public void set(T value) {
     Thread t = Thread.currentThread();
     ThreadLocalMap map = getMap(t);
@@ -1862,12 +1845,11 @@ public void set(T value) {
         createMap(t, value);
 }
 
-
 ```
 
 get() 方法类似。
 
-```
+```java
 public T get() {
     Thread t = Thread.currentThread();
     ThreadLocalMap map = getMap(t);
@@ -1882,7 +1864,6 @@ public T get() {
     return setInitialValue();
 }
 
-
 ```
 
 ThreadLocal 从理论上讲并不是用来解决多线程并发问题的，因为根本不存在多线程竞争。
@@ -1895,15 +1876,13 @@ ThreadLocal 从理论上讲并不是用来解决多线程并发问题的，因�
 
 可重入代码有一些共同的特征，例如不依赖存储在堆上的数据和公用的系统资源、用到的状态量都由参数中传入、不调用非可重入的方法等。
 
-锁优化
-===
+## 18. 锁优化
 
 这里的锁优化主要是指**虚拟机对 synchronized 的优化。**
 
 **锁竞争是 kernal mode 下的，会经过 user mode(用户态) 到 kernal mode(内核态) 的切换，是比较花时间的。**
 
-自旋锁
----
+### 自旋锁
 
 自旋锁的思想是让一个线程在请求一个共享数据的锁时执行忙循环（自旋）一段时间，如果在这段时间内能获得锁，就可以避免进入阻塞状态。
 
@@ -1913,8 +1892,7 @@ ThreadLocal 从理论上讲并不是用来解决多线程并发问题的，因�
 
 **在 JDK 1.6 中引入了自适应的自旋锁**。自适应意味着自旋的次数不再固定了，而是由**前一次在同一个锁上的自旋次数**及**锁的拥有者的状态来决定。**
 
-锁消除
----
+### 锁消除
 
 锁消除是**指对于被检测出不可能存在竞争的共享数据的锁进行消除**。检测到某段代码是线程安全的 (言外之意：无锁也是安全的)，JVM 会安全地原有的锁消除掉！
 
@@ -1922,17 +1900,16 @@ ThreadLocal 从理论上讲并不是用来解决多线程并发问题的，因�
 
 对于一些看起来没有加锁的代码，其实隐式的加了很多锁。例如下面的字符串拼接代码就隐式加了锁：
 
-```
+```java
 public static String concatString(String s1, String s2, String s3) {
     return s1 + s2 + s3;
 }
-
 
 ```
 
 String 是一个不可变的类，Javac 编译器会对 String 的拼接自动优化。在 JDK 1.5 之前，会转化为 StringBuffer 对象的连续 append() 操作，在 JDK 1.5 及以后的版本中，会转化为 StringBuilder 对象的连续 append() 操作，即上面的代码可能会变成下面的样子：
 
-```
+```java
 public static String concatString(String s1, String s2, String s3) {
     StringBuffer sb = new StringBuffer();
     sb.append(s1);
@@ -1941,13 +1918,11 @@ public static String concatString(String s1, String s2, String s3) {
     return sb.toString();
 }
 
-
 ```
 
 虚拟机观察变量 sb，很快就会发现它的动态作用域被限制在 concatString() 方法内部。也就是说，sb 的所有引用永远不会 “逃逸” 到 concatString() 方法之外，其他线程无法访问到它。因此，虽然这里有锁，但是可以被安全地消除掉。
 
-锁粗化
----
+### 锁粗化
 
 如果一系列的连续操作都对同一个对象反复加锁和解锁，频繁的加锁操作就会导致性能损耗。
 
@@ -1955,8 +1930,7 @@ public static String concatString(String s1, String s2, String s3) {
 
 但是如果一系列的连续操作都对同一个对象反复加锁和解锁，甚至加锁操作是出现在循环体中的，频繁地进行互斥同步操作也会导致不必要的性能损耗。
 
-偏向锁
----
+### 偏向锁
 
 **总结：在无竞争环境下，把整个同步都消除，CAS 也不做。**
 
@@ -1968,8 +1942,7 @@ public static String concatString(String s1, String s2, String s3) {
 
 **当有另外一个线程去尝试获取这个锁对象时，偏向状态就宣告结束，此时撤销偏向（Revoke Bias）后恢复到未锁定状态或者轻量级锁状态。**
 
-轻量级锁
-----
+### 轻量级锁
 
 **轻量级锁是相对于传统的重量级锁而言**，它使用 CAS 操作来避免重量级锁使用互斥量的开销。对于绝大部分的锁，在整个同步周期内都是不存在竞争的，因此也就不需要都使用互斥量进行同步，**可以先采用 CAS 操作进行同步，如果 CAS 失败了再改用互斥量进行同步。（乐观锁）**
 
@@ -1981,24 +1954,18 @@ JDK 1.6 引入了**偏向锁**和**轻量级锁**，从而让锁拥有了四个�
 
 **简单来说：如果发现同步周期内都是不存在竞争，JVM 会使用 CAS 操作来替代操作系统互斥量。这个优化就被叫做轻量级锁。**
 
-多线程开发良好的实践
-==========
+## 19. 多线程开发良好的实践
 
-*   **缩小同步范围**，例如对于 synchronized，应该尽量使用同步块而不是同步方法。
-    
-*   **多用同步类少用 wait() 和 notify()**, 多用 CountDownLatch, Semaphore, CyclicBarrier 和 Exchanger 这些同步类。他们简化了编码操作，而用 wait() 和 notify() 很难实现对复杂控制流的控制。其次，这些类是由最好的企业编写和维护，在后续的 JDK 中它们还会不断优化和完善，使用这些更高等级的同步工具你的程序可以不费吹灰之力获得优化。
-    
-*   **多用并发集合少用同步集合。**
-    
-*   使用**本地变量 ThreadLocal 和不可变类**来保证线程安全。
-    
-*   **使用线程池**而不是直接创建 Thread 对象，这是因为创建线程代价很高，线程池可以有效地利用有限的线程来启动任务。
-    
-*   使用 **BlockingQueue** 实现生产者消费者问题。
-    
+- **缩小同步范围**，例如对于 synchronized，应该尽量使用同步块而不是同步方法。
 
-补充经典并发集合和同步集合参考
----------------
+- **多用同步类少用 wait() 和 notify()**, 多用 CountDownLatch, Semaphore, CyclicBarrier 和 Exchanger 这些同步类。他们简化了编码操作，而用 wait() 和 notify() 很难实现对复杂控制流的控制。其次，这些类是由最好的企业编写和维护，在后续的 JDK 中它们还会不断优化和完善，使用这些更高等级的同步工具你的程序可以不费吹灰之力获得优化。
+
+- **多用并发集合少用同步集合。**
+- 使用**本地变量 ThreadLocal 和不可变类**来保证线程安全。
+- **使用线程池**而不是直接创建 Thread 对象，这是因为创建线程代价很高，线程池可以有效地利用有限的线程来启动任务。
+- 使用 **BlockingQueue** 实现生产者消费者问题。
+
+## 20. 补充经典并发集合和同步集合参考
 
 [https://www.cnblogs.com/suneryong/p/6726413.html](https://www.cnblogs.com/suneryong/p/6726413.html)
 
@@ -2006,55 +1973,51 @@ JDK 1.6 引入了**偏向锁**和**轻量级锁**，从而让锁拥有了四个�
 
 > java.util.concurrent 包中包含的并发集合类如下：
 
-```
+```java
 ConcurrentHashMap
 
 CopyOnWriteArrayList
 
 CopyOnWriteArraySet
 
-
 ```
 
-对象的发布与逸出
-========
+## 21. 对象的发布与逸出
 
-*   发布 (publish) 使对象能够在当前作用域之外的代码中使用
-*   逸出 (escape) 当某个不应该发布的对象被发布了
+- 发布 (publish) 使对象能够在当前作用域之外的代码中使用
+- 逸出 (escape) 当某个不应该发布的对象被发布了
 
 常见逸出的有下面几种方式：
 
-*   静态域逸出
-*   public 修饰的 get 方法
-*   方法参数传递
-*   隐式的 this
+- 静态域逸出
+- public 修饰的 get 方法
+- 方法参数传递
+- 隐式的 this
 
 具体解释见：[https://segmentfault.com/a/1190000014546223#articleHeader4](https://segmentfault.com/a/1190000014546223#articleHeader4)
 
 **安全发布对象有几种常见的方式：**
 
-*   在静态域中直接初始化 ： public static Person = new Person();
-    *   静态初始化由 JVM 在类的初始化阶段就执行了，JVM 内部存在着同步机制，致使这种方式我们可以安全发布对象
-*   对应的引用保存到 volatile 或者 AtomicReferance 引用中
-    *   保证了该对象的引用的可见性和原子性
-*   由 final 修饰
-    *   该对象是**不可变的**
-*   由锁来保护
-    *   发布和使用的时候都需要**加锁**
+- 在静态域中直接初始化 ： public static Person = new Person();
+  - 静态初始化由 JVM 在类的初始化阶段就执行了，JVM 内部存在着同步机制，致使这种方式我们可以安全发布对象
+- 对应的引用保存到 volatile 或者 AtomicReferance 引用中
+  - 保证了该对象的引用的可见性和原子性
+- 由 final 修饰
+  - 该对象是**不可变的**
+- 由锁来保护
+  - 发布和使用的时候都需要**加锁**
 
-Java 线程锁
-========
+## 22. Java 线程锁
 
 [https://segmentfault.com/a/1190000014747667#articleHeader5](https://segmentfault.com/a/1190000014747667#articleHeader5)
 
-避免死锁的方法
--------
+## 23. 避免死锁的方法
 
 ### 固定锁顺序避免死锁
 
 上面 transferMoney() 发生死锁的原因是因为加锁顺序不一致而出现的~
 
-*   如果所有线程以固定的顺序来获得锁，那么程序中就不会出现锁顺序死锁问题！
+- 如果所有线程以固定的顺序来获得锁，那么程序中就不会出现锁顺序死锁问题！
 
 例子中，改造为得到对应的 hash 值来固定加锁的顺序，这样我们就不会发生死锁的问题了！
 
@@ -2065,63 +2028,3 @@ Java 线程锁
 ### 使用定时锁
 
 使用显式 Lock 锁，在获取锁时使用 tryLock() 方法。当等待超过时限的时候，tryLock() 不会一直等待，而是返回错误信息。
-
-关注我
-===
-
-我是蛮三刀把刀，目前为后台开发工程师。主要关注后台开发，网络安全，Python 爬虫等技术。
-
-来微信和我聊聊：yangzd1102
-
-Github：[https://github.com/qqxx6661](https://github.com/qqxx6661)
-
-### 原创博客主要内容
-
-*   笔试面试复习知识点手册
-*   Leetcode 算法题解析（前 150 题）
-*   剑指 offer 算法题解析
-*   Python 爬虫相关技术分析和实战
-*   后台开发相关技术分析和实战
-
-**同步更新以下博客**
-
-**1. Csdn**
-
-[http://blog.csdn.net/qqxx6661](http://blog.csdn.net/qqxx6661)
-
-拥有专栏：Leetcode 题解（Java/Python）、Python 爬虫开发
-
-**2. 知乎**
-
-[https://www.zhihu.com/people/yang-zhen-dong-1/](https://www.zhihu.com/people/yang-zhen-dong-1/)
-
-拥有专栏：码农面试助攻手册
-
-**3. 掘金**
-
-[https://juejin.im/user/5b48015ce51d45191462ba55](https://juejin.im/user/5b48015ce51d45191462ba55)
-
-**4. 简书**
-
-[https://www.jianshu.com/u/b5f225ca2376](https://www.jianshu.com/u/b5f225ca2376)
-
-### 个人项目：电商价格监控网站
-
-本人长期维护的个人项目，完全免费，请大家多多支持。
-
-**实现功能**
-
-*   **京东商品监控**：设置商品 ID 和预期价格，当商品价格【低于】设定的预期价格后自动发送邮件提醒用户。(一小时以内)
-*   **京东品类商品监控**：用户订阅特定品类后，该类降价幅度大于 7 折的【自营商品】会被选出并发送邮件提醒用户。
-*   **品类商品浏览，商品历史价格曲线，商品历史最高最低价**
-*   持续更新中…
-
-**网站地址**
-
-[https://pricemonitor.online/](https://pricemonitor.online/)
-
-### 个人公众号：Rude3Knife
-
-![](https://img-blog.csdnimg.cn/20190108201638256.png)
-
-**如果文章对你有帮助，不妨收藏起来并转发给您的朋友们~**
