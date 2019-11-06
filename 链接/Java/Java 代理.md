@@ -1,4 +1,3 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://segmentfault.com/a/1190000011291179
 
 # Java 代理
 
@@ -11,6 +10,10 @@
 > 代理模式 UML 类图
 
 ![代理模式 ](https://segmentfault.com/img/remote/1460000011291184)
+
+1、RealSubject 是委托类，Proxy 是代理类；
+2、Subject 是委托类和代理类的接口；
+3、DoAction() 是委托类和代理类的共同方法；
 
 举个例子，我们生活中经常到火车站去买车票，但是人一多的话，就会非常拥挤，于是就有了代售点，我们能从代售点买车票了。这其中就是代理模式的体现，代售点代理了火车站对象，提供购买车票的方法。
 
@@ -61,6 +64,7 @@ package com.proxy;
 public class UserDaoProxy implements IUserDao{
 
   private IUserDao target;
+
   public UserDaoProxy(IUserDao target) {
     this.target = target;
   }
@@ -72,7 +76,6 @@ public class UserDaoProxy implements IUserDao{
     System.out.println("提交事务");
   }
 }
-
 
 ```
 
@@ -90,6 +93,7 @@ public class StaticUserProxy {
     IUserDao target = new UserDao();
     //代理对象
     UserDaoProxy proxy = new UserDaoProxy(target);
+
     proxy.save();
   }
 }
@@ -102,11 +106,11 @@ public class StaticUserProxy {
 开启事务
 保存数据
 提交事务
-
-
 ```
 
-## 三、动态代理
+**静态代理实现中，一个委托类对应一个代理类，代理类在编译期间就已经确定。**
+
+## 三、JDK 动态代理
 
 动态代理利用了 [JDK API](http://tool.oschina.net/uploads/apidocs/jdk-zh/)，动态地在内存中构建代理对象，从而实现对目标对象的代理功能。动态代理又被称为 JDK 代理或接口代理。
 
@@ -203,12 +207,12 @@ public class ProxyFactory implements InvocationHandler{
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("开启事务");
+        System.out.println("开启事务------before------");
 
         // 执行目标对象方法
         Object returnValue = method.invoke(target, args);
 
-        System.out.println("提交事务");
+        System.out.println("提交事务------end------");
         return null;
         }
       });
@@ -243,13 +247,13 @@ public class TestProxy {
 ```java
 class com.proxy.UserDao
 class com.sun.proxy.$Proxy4
-开启事务
+开启事务------before------
 保存数据
-提交事务
+提交事务------end------
 
 ```
 
-> 举例2：保存用户功能的动态代理实现
+> 举例2：动态代理实现写法2
 
 首先我们定义了一个 Subject 类型的接口，为其声明了两个方法：
 
@@ -288,10 +292,10 @@ public class RealSubject implements Subject
 ```java
 public class DynamicProxy implements InvocationHandler
 {
-    //　这个就是我们要代理的真实对象
+    // 这个就是我们要代理的真实对象
     private Object subject;
 
-    //    构造方法，给我们要代理的真实对象赋初值
+    // 构造方法，给我们要代理的真实对象赋初值
     public DynamicProxy(Object subject)
     {
         this.subject = subject;
@@ -301,15 +305,15 @@ public class DynamicProxy implements InvocationHandler
     public Object invoke(Object object, Method method, Object[] args)
             throws Throwable
     {
-        //　　在代理真实对象前我们可以添加一些自己的操作
+        // 在代理真实对象前我们可以添加一些自己的操作
         System.out.println("before rent house");
 
         System.out.println("Method:" + method);
 
-        //    当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
+        // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
         method.invoke(subject, args);
 
-        //　　在代理真实对象后我们也可以添加一些自己的操作
+        // 在代理真实对象后我们也可以添加一些自己的操作
         System.out.println("after rent house");
 
         return null;
@@ -326,10 +330,10 @@ public class Client
 {
     public static void main(String[] args)
     {
-        //    我们要代理的真实对象
+        // 我们要代理的真实对象
         Subject realSubject = new RealSubject();
 
-        //    我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
+        // 我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
         InvocationHandler handler = new DynamicProxy(realSubject);
 
         /*
@@ -418,7 +422,21 @@ public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)
 
 这就是我们的 java 动态代理机制
 
-## 四、cglib 代理
+附：代理对象的生成过程由Proxy类的newProxyInstance方法实现，分为3个步骤：
+1、 roxyGenerator.generateProxyClass方法负责生成代理类的字节码，生成逻辑比较复杂，有兴趣的同学可以继续分析源码 sun.misc.ProxyGenerator；
+
+// proxyName：格式如 "com.sun.proxy.$Proxy.1"；
+// interfaces：代理类需要实现的接口数组；
+// accessFlags：代理类的访问标识；
+byte[] proxyClassFile = ProxyGenerator.generateProxyClass(proxyName, interfaces, accessFlags);
+
+2、native方法Proxy.defineClass0负责字节码加载的实现，并返回对应的Class对象。
+
+Class clazz = defineClass0(loader, proxyName, proxyClassFile, 0, proxyClassFile.length);
+
+3、利用clazz.newInstance反射机制生成代理类的对象；
+
+## 四、cglib 动态代理
 
 > cglib is a powerful, high performance and quality Code Generation Library. It can extend JAVA classes and implement interfaces at runtime.
 
@@ -433,9 +451,9 @@ public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)
 * CGLIB 包的底层是通过使用一个小而快的字节码处理框架 ASM，来转换字节码并生成新的类。  
   不鼓励直接使用 ASM，因为它需要你对 JVM 内部结构包括 class 文件的格式和指令集都很熟悉。
 
-cglib 与动态代理最大的**区别**就是
+cglib 与 JDK 动态代理最大的**区别**就是
 
-* 使用动态代理的对象必须实现一个或多个接口
+* 使用 JDK 动态代理的对象必须实现一个或多个接口
 * 使用 cglib 代理的对象则无需实现接口，达到代理类无侵入。
 
 使用 cglib 需要引入 [cglib 的 jar 包](https://repo1.maven.org/maven2/cglib/cglib/3.2.5/cglib-3.2.5.jar)，如果你已经有 spring-core 的 jar 包，则无需引入，因为 spring 中包含了 cglib。
@@ -467,7 +485,7 @@ public class UserDao{
 
 ```
 
-* 代理对象：ProxyFactory
+* 代理对象：ProxyFactory，实现MethodIntercepter接口，定义方法的拦截器
 
 ```java
 package com.cglib;
@@ -481,6 +499,7 @@ import net.sf.cglib.proxy.MethodProxy;
 public class ProxyFactory implements MethodInterceptor{
 
   private Object target;//维护一个目标对象
+
   public ProxyFactory(Object target) {
     this.target = target;
   }
@@ -497,6 +516,7 @@ public class ProxyFactory implements MethodInterceptor{
     return en.create();
   }
 
+  //参数分别为：1、代理对象；2、委托类方法；3、方法参数；4、代理方法的MethodProxy对象。
   @Override
   public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
     System.out.println("开启事务");
@@ -531,7 +551,6 @@ public class TestProxy {
   }
 }
 
-
 ```
 
 * 输出结果
@@ -545,18 +564,26 @@ class com.cglib.UserDao$$EnhancerByCGLIB$$552188b6
 
 ```
 
+**代理对象的生成过程由Enhancer类实现，大概步骤如下：**
+1、生成代理类Class的二进制字节码；
+2、通过Class.forName加载二进制字节码，生成Class对象；
+3、通过反射机制获取实例构造，并初始化代理类对象。
+
 ## 五、总结
 
 1. 静态代理实现较简单，只要代理对象对目标对象进行包装，即可实现增强功能，但静态代理只能为一个目标对象服务，如果目标对象过多，则会产生很多代理类。
 2. JDK 动态代理需要目标对象实现业务接口，代理类只需实现 InvocationHandler 接口。
-3. 动态代理生成的类为 lass com.sun.proxy.$Proxy4，cglib 代理生成的类为 class com.cglib.UserDao$$EnhancerByCGLIB$$552188b6。
+3. JDK 动态代理生成的类为 class com.sun.proxy.\$Proxy4，cglib 代理生成的类为 class com.cglib.UserDao\$\$EnhancerByCGLIB\$\$552188b6。
 4. 静态代理在编译时产生 class 字节码文件，可以直接使用，效率高。
-5. 动态代理必须实现 InvocationHandler 接口，通过反射代理方法，比较消耗系统性能，但可以减少代理类的数量，使用更灵活。
+5. JDK 动态代理必须实现 InvocationHandler 接口，通过反射代理方法，比较消耗系统性能，但可以减少代理类的数量，使用更灵活。
 6. cglib 代理无需实现接口，通过生成类字节码实现代理，比反射稍快，不存在性能问题，但 cglib 会继承目标对象，需要重写方法，所以目标对象不能为 final 类。
+7. JDK 动态代理采用反射机制调用委托类的方法，cglib 代理采用类似索引的方式直接调用委托类方法；
 
 ## 六、相关资料
 
 1. [深入剖析动态代理--性能比较](https://blog.csdn.net/kingson_wu/article/details/50864637)
+2. [Java三种代理模式：静态代理、动态代理和cglib代理](https://segmentfault.com/a/1190000011291179)
+3. [说说Java代理模式](https://www.cnblogs.com/chinajava/p/5880870.html)
 
 代理模式相关知识
 
