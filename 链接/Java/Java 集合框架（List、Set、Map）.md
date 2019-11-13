@@ -115,21 +115,13 @@ Collection 实现了 Iterable 接口，其中的 iterator() 方法能够产生�
 
 从 JDK 1.5 之后可以使用 foreach 方法来遍历实现了 Iterable 接口的聚合对象。
 
-```
-1
-2
-3
-4
-5
-6
+```java
 List<String> list = new ArrayList<>();
 list.add("a");
 list.add("b");
 for (String item : list) {
 System.out.println(item);
 }
-
-
 ```
 
 适配器模式
@@ -139,13 +131,9 @@ System.out.println(item);
 
 java.util.Arrays#asList() 可以把数组类型转换为 List 类型。
 
-```
-1
-2
+```java
 @SafeVarargs
 public static <T> List<T> asList(T... a)
-
-
 ```
 
 如果要将数组类型转换为 List 类型，应该注意的是 asList() 的参数为泛型的变长参数，因此不能使用基本类型数组作为参数，**只能使用相应的包装类型数组。**
@@ -192,13 +180,9 @@ ArrayList
 
 实现了 RandomAccess 接口，因此支持随机访问。这是理所当然的，因为 ArrayList 是基于数组实现的。
 
-```
-1
-2
+```java
 public class ArrayList<E> extends AbstractList<E>
 implements List<E>, RandomAccess, Cloneable, java.io.Serializable
-
-
 ```
 
 ### 扩容
@@ -209,38 +193,7 @@ implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 
 因此最好在创建 ArrayList **对象时就指定大概的容量大小，减少扩容操作的次数。**
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
+```java
 public boolean add(E e) {
 ensureCapacityInternal(size + 1);// Increments modCount!!
 elementData[size++] = e;
@@ -272,8 +225,6 @@ newCapacity = hugeCapacity(minCapacity);
 // minCapacity is usually close to size, so this is a win:
 elementData = Arrays.copyOf(elementData, newCapacity);
 }
-
-
 ```
 
 ### 加入元素：add
@@ -304,17 +255,7 @@ elementData = Arrays.copyOf(elementData, newCapacity);
 * 计算出需要移动的个数，并移动
 * 设置为 null，让 GC 回收（所以说不是立刻回收，而是等待 GC 回收）
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+```java
 public E remove(int index) {
 rangeCheck(index);
 modCount++;
@@ -343,25 +284,7 @@ modCount 用来记录 ArrayList 结构发生变化的次数。结构发生变化
 
 在进行序列化或者迭代等操作时，需要比较操作前后 modCount 是否改变，如果改变了需要抛出 ConcurrentModificationException。
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
+```java
 private void writeObject(java.io.ObjectOutputStream s)
 throws java.io.IOException{
 // Write out element count, and any hidden stuff
@@ -404,37 +327,13 @@ ArrayList 基于数组实现，并且具有动态扩容特性，因此保存元�
 
 保存元素的数组 elementData 使用 transient 修饰，**该关键字声明数组默认不会被序列化**。
 
-```
-1
+```java
 transient Object[] elementData; // non-private to simplify nested class access
-
-
 ```
 
 ArrayList 实现了 writeObject() 和 readObject() **来控制只序列化数组中有元素填充那部分内容**。
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
+```java
 private void readObject(java.io.ObjectInputStream s)
 throws java.io.IOException, ClassNotFoundException {
 elementData = EMPTY_ELEMENTDATA;
@@ -460,25 +359,7 @@ a[i] = s.readObject();
 
 ```
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
+```java
 private void writeObject(java.io.ObjectOutputStream s)
 throws java.io.IOException{
 // Write out element count, and any hidden stuff
@@ -497,21 +378,14 @@ if (modCount != expectedModCount) {
 throw new ConcurrentModificationException();
 }
 }
-
-
 ```
 
 序列化时需要使用 ObjectOutputStream 的 writeObject() 将对象转换为字节流并输出。**而 writeObject() 方法在传入的对象存在 writeObject() 的时候会去反射调用该对象的 writeObject() 来实现序列化**。反序列化使用的是 ObjectInputStream 的 readObject() 方法，原理类似。
 
-```
-1
-2
-3
+```java
 ArrayList list = new ArrayList();
 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 oos.writeObject(list);
-
-
 ```
 
 Vector
@@ -529,22 +403,15 @@ Vector
 
 可以使用 `Collections.synchronizedList();` 得到一个线程安全的 ArrayList。
 
-```
-1
-2
+```java
 List<String> list = new ArrayList<>();
 List<String> synList = Collections.synchronizedList(list);
-
-
 ```
 
 也可以使用 concurrent 并发包下的 CopyOnWriteArrayList 类。
 
-```
-1
+```java
 List<String> list = new CopyOnWriteArrayList<>();
-
-
 ```
 
 CopyOnWriteArrayList
@@ -559,25 +426,7 @@ CopyOnWriteArrayList
 
 ### 读写分离
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
+```java
 public boolean add(E e) {
 final ReentrantLock lock = this.lock;
 lock.lock();
@@ -600,17 +449,11 @@ array = a;
 
 ```
 
-```
-1
-2
-3
-4
+```java
 @SuppressWarnings("unchecked")
 private E get(Object[] a, int index) {
 return (E) a[index];
 }
-
-
 ```
 
 ### 适用场景
@@ -640,30 +483,19 @@ LinkedList
 
 基于双向链表实现，内部使用 Node 来存储链表节点信息。
 
-```
-1
-2
-3
-4
-5
+```java
 private static class Node<E> {
 E item;
 Node<E> next;
 Node<E> prev;
 }
-
-
 ```
 
 每个链表存储了 Head 和 Tail 指针：
 
-```
-1
-2
+```java
 transient Node<E> first;
 transient Node<E> last;
-
-
 ```
 
 ![](https://img-blog.csdnimg.cn/20190122192035923.png)
@@ -721,87 +553,27 @@ HashMap
 
 hashMap 的一个内部类 Node：
 
-```
-1
-2
-3
-4
-5
+```java
 static class Node<K,V> implements Map.Entry<K,V> {
 final int hash;
 final K key;
 V value;
 Node<K,V> next; //链表结构，存储下一个元素
-
-
 ```
 
 ![](https://img-blog.csdnimg.cn/20190122192056320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxeHg2NjYx,size_16,color_FFFFFF,t_70)
 
 Node 内部包含了一个 Entry 类型的数组 table，数组中的每个位置被当成一个桶。
 
-```
-1
+```java
 transient Entry[] table;
-
-
 ```
 
 Entry 存储着键值对。它包含了四个字段，从 next 字段我们可以看出 Entry 是一个链表。即数组中的每个位置被当成一个桶，一个桶存放一个链表。
 
 HashMap 使用拉链法来解决冲突，同一个链表中存放哈希值相同的 Entry。
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
+```java
 static class Entry<K,V> implements Map.Entry<K,V> {
 final K key;
 V value;
@@ -852,8 +624,6 @@ public final String toString() {
 return getKey() + "=" + getValue();
 }
 }
-
-
 ```
 
 ### 构造器
@@ -862,16 +632,7 @@ return getKey() + "=" + getValue();
 
 构造时就会调用 tableSizeFor()：返回一个大于输入参数且最近的 2 的整数次幂。
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
+```java
 static final int tableSizeFor(int cap) {
 int n = cap - 1;
 n |= n >>> 1;
@@ -881,25 +642,17 @@ n |= n >>> 8;
 n |= n >>> 16;
 return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
 }
-
-
 ```
 
 ### 拉链法
 
 应该注意到链表的插入是以**头插法**方式进行的
 
-```
-1
-2
-3
-4
+```java
 HashMap<String, String> map = new HashMap<>();
 map.put("K1", "V1");
 map.put("K2", "V2");
 map.put("K3", "V3");
-
-
 ```
 
 * 新建一个 HashMap，默认大小为 16；
@@ -918,33 +671,7 @@ map.put("K3", "V3");
 * 如果 key **存在的情况下，该方法返回的是旧的 value，**
 * 如果 key **不存在，那么返回 null。**
 
-```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
+```java
 public V put(K key, V value) {
 if (table == EMPTY_TABLE) {
 inflateTable(threshold);
@@ -971,26 +698,12 @@ modCount++;
 addEntry(hash, key, value, i);
 return null;
 }
-
-
 ```
 
 HashMap 允许插入键为 null 的键值对。但是因为无法调用 null 的 hashCode() 方法，也就无法确定该键值对的桶下标，只能通过强制指定一个桶下标来存放。HashMap 使用第 0 个桶存放键为 null 的键值对。
 
 ```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
+
 private V putForNullKey(V value) {
 for (Entry<K,V> e = table[0]; e != null; e = e.next) {
 if (e.key == null) {
@@ -1011,22 +724,6 @@ return null;
 使用链表的头插法，也就是新的键值对插在链表的头部，而不是链表的尾部。
 
 ```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
 void addEntry(int hash, K key, V value, int bucketIndex) {
 if ((size >= threshold) && (null != table[bucketIndex])) {
 resize(2 * table.length);
@@ -1044,16 +741,9 @@ table[bucketIndex] = new Entry<>(hash, key, value, e);
 size++;
 }
 
-
 ```
 
 ```
-1
-2
-3
-4
-5
-6
 Entry(int h, K k, V v, Entry<K,V> n) {
 value = v;
 next = n;
@@ -1083,8 +773,6 @@ hash = h;
 很多操作都需要先确定一个键值对所在的桶下标。
 
 ```
-1
-2
 int hash = hash(key);
 int i = indexFor(hash, table.length);
 
@@ -1094,20 +782,6 @@ int i = indexFor(hash, table.length);
 **4.1 计算 hash 值**
 
 ```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
 final int hash(Object k) {
 int h = hashSeed;
 if (0 != h && k instanceof String) {
@@ -1122,14 +796,9 @@ h ^= k.hashCode();
 h ^= (h >>> 20) ^ (h >>> 12);
 return h ^ (h >>> 7) ^ (h >>> 4);
 }
-
-
 ```
 
 ```
-1
-2
-3
 public final int hashCode() {
 return Objects.hashCode(key) ^ Objects.hashCode(value);
 }
@@ -1142,20 +811,13 @@ return Objects.hashCode(key) ^ Objects.hashCode(value);
 令 x = 1<<\4，即 \x 为 2 的 4 次方，它具有以下性质：
 
 ```
-1
-2
 x : 00010000
 x-1 : 00001111
-
-
 ```
 
 令一个数 y 与 x-1 做与运算，可以去除 y 位级表示的第 4 位以上数：
 
 ```
-1
-2
-3
 y : 10110010
 x-1 : 00001111
 y&(x-1) : 00000010
@@ -1166,13 +828,9 @@ y&(x-1) : 00000010
 这个性质和 y 对 x 取模效果是一样的：
 
 ```
-1
-2
-3
 y : 10110010
 x : 00010000
 y%x : 00000010
-
 
 ```
 
@@ -1181,9 +839,6 @@ y%x : 00000010
 确定桶下标的最后一步是将 key 的 hash 值对桶个数取模：hash%capacity，如果能保证 capacity 为 2 的 n 次方，那么就可以将这个操作转换为位运算。
 
 ```
-1
-2
-3
 static int indexFor(int h, int length) {
 return h & (length-1);
 }
@@ -1225,21 +880,6 @@ return h & (length-1);
 | loadFactor | 装载因子，table 能够使用的比例，threshold = capacity * loadFactor。         |
 
 ```
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
 static final int DEFAULT_INITIAL_CAPACITY = 16;
 
 static final int MAXIMUM_CAPACITY = 1 << 30;
@@ -1262,12 +902,6 @@ transient int modCount;
 从下面的添加元素代码中可以看出，当需要扩容时，令 capacity 为原来的两倍。
 
 ```
-1
-2
-3
-4
-5
-6
 void addEntry(int hash, K key, V value, int bucketIndex) {
 Entry<K,V> e = table[bucketIndex];
 table[bucketIndex] = new Entry<>(hash, key, value, e);
@@ -1312,7 +946,6 @@ e = next;
 }
 }
 
-
 ```
 
 ### 扩容 - 重新计算桶下标
@@ -1326,8 +959,6 @@ Rehash 优化：[https://my.oschina.net/u/3568600/blog/1933764](https://my.oschi
 ```
 capacity : 00010000
 new capacity : 00100000
-
-
 ```
 
 对于一个 Key，
@@ -1353,8 +984,6 @@ HashMap 构造函数允许用户传入的容量不是 2 的 n 次方，因为它
 mask |= mask >> 111011000
 mask |= mask >> 211111110
 mask |= mask >> 411111111
-
-
 ```
 
 mask+1 是大于原始数字的最小的 2 的 n 次方。
@@ -1362,8 +991,6 @@ mask+1 是大于原始数字的最小的 2 的 n 次方。
 ```
 num 10010000
 mask+1 100000000
-
-
 ```
 
 以下是 HashMap 中计算数组容量的代码：
@@ -1378,8 +1005,6 @@ n |= n >>> 8;
 n |= n >>> 16;
 return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
 }
-
-
 ```
 
 ### 链表转红黑树
@@ -1457,8 +1082,6 @@ final K key;
 volatile V value;
 volatile HashEntry<K,V> next;
 }
-
-
 ```
 
 ConcurrentHashMap 采用了分段锁，**每个分段锁维护着几个桶，多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）。**
@@ -1557,8 +1180,6 @@ Entry(int hash, K key, V value, Node<K,V> next) {
 super(hash, key, value, next);
 }
 }
-
-
 ```
 
 ### 构造器
@@ -1570,7 +1191,6 @@ super(hash, key, value, next);
 * **默认为 false，代表按照插入顺序进行迭代；**
 * 当然可以显式设置为 true，代表以访问顺序进行迭代。
 * 在构建新节点时，构建的是 LinkedHashMap.Entry 不再是 Node.
-
 
 ### 获取元素：get
 
@@ -1619,7 +1239,6 @@ super(MAX_ENTRIES, 0.75f, true);
 }
 }
 
-
 ```
 
 ```java
@@ -1633,13 +1252,10 @@ cache.put(4, "d");
 System.out.println(cache.keySet());
 }
 
-
 ```
 
 ```java
 [3, 1, 4]
-
-
 ```
 
 **实现详细代码请参考文章：补充知识点 - 缓存**
@@ -1706,7 +1322,6 @@ HashSet
 
 > public HashSet() {map = new HashMap<>();}
 
-
 如果添加的是在 HashSet 中不存在的，则返回 true；如果添加的元素已经存在，返回 false。
 
 **对于 HashSet 中保存的对象，请注意正确重写其 equals 和 hashCode 方法，以保证放入的对象的唯一性。**
@@ -1768,10 +1383,8 @@ WeakHashMap 的 Entry 继承自 WeakReference，被 WeakReference 关联的**对
 
 WeakHashMap 主要用来实现缓存，通过使用 WeakHashMap 来引用缓存对象，由 JVM 对这部分缓存进行回收。
 
-```
-1
+```java
 private static class Entry<K,V> extends WeakReference<Object> implements Map.Entry<K,V>
-
 
 ```
 
@@ -1819,8 +1432,6 @@ this.eden.clear();
 this.eden.put(k, v);
 }
 }
-
-
 ```
 
 常见问题总结
@@ -1865,7 +1476,6 @@ ListIterator 有什么特点
 * 使用泛型，避免在运行时出现 ClassCastException
 
 * 尽可能使用 Collections 工具类，或者获取只读、同步或空的集合，而非编写自己的实现。它将会提供代码重用性，它有着更好的稳定性和可维护性
-
 
 参考
 ==

@@ -2,9 +2,7 @@
 
 ## 前言
 
-本文快速回顾了 Java 中最基础的知识点，用作面试前突击复习，事半功倍。
-
-此为上篇，包括内容：基础知识点，集合类  
+本文包括内容：基础知识点，集合类  
 
 ## 1. 基础知识点
 
@@ -351,7 +349,6 @@ public class NewStringTest {
         String s = new String("abc");
     }
 }
-
 ```
 
 使用 javap -verbose 进行反编译，得到以下内容：
@@ -808,14 +805,12 @@ public final void wait() throws InterruptedException
 
     ```java
     x.equals(x); // true
-
     ```
 
     Ⅱ 对称性
 
     ```java
     x.equals(y) == y.equals(x); // true
-
     ```
 
     Ⅲ 传递性
@@ -823,7 +818,6 @@ public final void wait() throws InterruptedException
     ```java
     if (x.equals(y) && y.equals(z))
         x.equals(z); // true;
-
     ```
 
     Ⅳ 一致性
@@ -832,7 +826,6 @@ public final void wait() throws InterruptedException
 
     ```java
     x.equals(y) == x.equals(y); // true
-
     ```
 
     Ⅴ 与 null 的比较
@@ -841,7 +834,6 @@ public final void wait() throws InterruptedException
 
     ```java
     x.equals(null); // false;
-
     ```
 
 * **2. 等价与相等**

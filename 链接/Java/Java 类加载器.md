@@ -5,13 +5,14 @@
 
 类从被加载到虚拟机内存中开始，到卸载出内存为止，
 它的整个生命周期分为7个阶段，
-**加载(Loading)、
-验证(Verification)、
-准备(Preparation)、
-解析(Resolution)、
-初始化(Initialization)、
-使用(Using)、
-卸载(Unloading)。**
+
+- 加载(Loading)、
+- 验证(Verification)、
+- 准备(Preparation)、
+- 解析(Resolution)、
+- 初始化(Initialization)、
+- 使用(Using)、
+- 卸载(Unloading)。**
 
 其中**验证、准备、解析**三个部分统称为**链接**。
 
