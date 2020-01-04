@@ -1,4 +1,4 @@
-/*
+ /*
  * @lc app=leetcode.cn id=278 lang=java
  *
  * [278] 第一个错误的版本
