@@ -11,7 +11,7 @@ class Solution {
         int r = citations.length;
         while(l<r){
             int mid = (l+r)/2;
-            if(citations[mid]>=citations.length - mid){
+            if(citations[mid]>=citations.length - mid){ //中间值大于数组长度到中间值的距离
                 r = mid;
             }else{
                 l = mid + 1;

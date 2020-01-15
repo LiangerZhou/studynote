@@ -14,7 +14,7 @@ public class Solution extends VersionControl {
         int r = n;
         while(l<r){
             int mid = l+(r-l)/2;
-            if(isBadVersion(mid)==true){
+            if(isBadVersion(mid)==true){ //模板一
                 r = mid;
             }else{
                 l = mid+1;

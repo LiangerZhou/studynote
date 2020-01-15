@@ -36,11 +36,11 @@ class Solution {
             int mid = (l+r)/2;
             int cnt = 0;
             for(int i:nums){
-                if(i<=mid && i>=l){
+                if(i<=mid && i>=l){ //统计数组中小于等于mid大于左的数个数
                     cnt++;
                 }
             }
-            if(cnt>(mid-l+1)){
+            if(cnt>(mid-l+1)){ //如果数个数大于mid，说明左半边有重复数
                 r = mid;
             }else{
                 l = mid+1;

@@ -11,7 +11,7 @@ class Solution {
         int r = nums.length -1;
         while(l<r){
             int mid = (l+r)/2;
-            if(nums[mid]<=nums[r]){
+            if(nums[mid]<=nums[r]){ //模板一
                 r =  mid;
             }else{
                 l = mid + 1;

@@ -10,7 +10,7 @@ class Solution {
         int l = 0;
         int r = x;
         while(l<r){
-            int mid = (l + r + 1)/2;
+            int mid = (l + r + 1)>>>1; // 舍去小数（模板二）
             if(mid<=x/mid){
                 l = mid;
             }else{

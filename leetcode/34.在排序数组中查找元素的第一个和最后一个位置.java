@@ -14,7 +14,7 @@ class Solution {
         int r = nums.length - 1;
         while(l<r){
             int mid = (l + r)/2;
-            if(nums[mid]>=target){
+            if(nums[mid]>=target){ //求左边大于等于target的数 模板一
                 r = mid;
             }else{
                 l = mid + 1;
@@ -28,7 +28,7 @@ class Solution {
         l = 0;
         r = nums.length - 1;
         while(l<r){
-            int mid = (l + r + 1)/2;  // 需要加1，否则mid-1 会出现负数
+            int mid = (l + r + 1)/2;  // 求右边小于等于target的数，模板二
             if(nums[mid]<=target){
                 l = mid;
             }else{
