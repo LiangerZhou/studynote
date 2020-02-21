@@ -25,7 +25,7 @@ class Solution {
         ListNode a,b;
         a = head; //第一个指针
         b = head.next; //第二个指针
-        while(b != null){ 
+        while(b != null){
             newhead = b.next; //把第二个指针后面的节点给newhead
             b.next = a; //将第二个指针的下一个指向第一个节点
             a = b; // 将a指针后移一位
