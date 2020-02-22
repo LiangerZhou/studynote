@@ -15,8 +15,23 @@
  * }
  */
 class Solution {
+
+    int res = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        
+        dfs(root);
+        return res;
+    }
+
+    private int dfs(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+
+        res = Math.max(res,left+right);
+        // 左右两边最大值加上到个节点的距离：1
+        return 1+Math.max(left,right);
     }
 }
 // @lc code=end
