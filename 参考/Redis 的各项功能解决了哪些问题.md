@@ -74,7 +74,7 @@ redis 支持丰富的数据类型，从最基础的 string 到复杂的常用到
 
 官方推荐采用 Redlock 算法，即使用 string 类型，加锁的时候给的一个具体的 key，然后设置一个随机的值；取消锁的时候用使用 lua 脚本来先执行获取比较，然后再删除 key。具体的命令如下：
 
-[![](http://common.cnblogs.com/images/copycode.gif)](javascript:void(0); "复制代码")
+[![](http://common.cnblogs.com/images/copycode.gif)](javascript:void(0); "")
 
 <pre>SET resource_name my_random_value NX PX 30000
 
@@ -85,7 +85,7 @@ else
 end
 </pre>
 
-[![](http://common.cnblogs.com/images/copycode.gif)](javascript:void(0); "复制代码")
+[![](http://common.cnblogs.com/images/copycode.gif)](javascript:void(0); "")
 
 # 总结
 

@@ -302,8 +302,7 @@ public class DynamicProxy implements InvocationHandler
     }
 
     @Override
-    public Object invoke(Object object, Method method, Object[] args)
-            throws Throwable
+    public Object invoke(Object object, Method method, Object[] args) throws Throwable
     {
         // 在代理真实对象前我们可以添加一些自己的操作
         System.out.println("before rent house");
@@ -421,6 +420,16 @@ public abstract void com.xiaoluo.dynamicproxy.Subject.hello(java.lang.String)
 正好就是我们的 Subject 接口中的两个方法，这也就证明了当我通过代理对象来调用方法的时候，起实际就是委托由其关联到的 handler 对象的 invoke 方法中来调用，并不是自己来真实调用，而是通过代理的方式来调用的。
 
 这就是我们的 java 动态代理机制
+
+总结如下：
+
+动态代理步骤：
+
+- 1.创建一个实现接口InvocationHandler的类，它必须实现invoke方法
+- 2.创建被代理的类以及接口
+- 3.通过Proxy的静态方法
+newProxyInstance(ClassLoaderloader, Class[] interfaces, InvocationHandler h)创建一个代理
+- 4.通过代理调用方法
 
 附：代理对象的生成过程由Proxy类的newProxyInstance方法实现，分为3个步骤：
 1、 roxyGenerator.generateProxyClass方法负责生成代理类的字节码，生成逻辑比较复杂，有兴趣的同学可以继续分析源码 sun.misc.ProxyGenerator；

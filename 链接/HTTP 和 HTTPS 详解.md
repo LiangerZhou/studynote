@@ -62,7 +62,7 @@ HTTP 是一个无状态的协议。无状态是指客户机（Web 浏览器）�
 主机名：localhost.com
 端口：8080
 对象路径：/index.htm
-复制代码
+
 
 ```
 
@@ -92,7 +92,7 @@ HTTP 是一个无状态的协议。无状态是指客户机（Web 浏览器）�
 
 ```
 Connection:keep-alive
-复制代码
+
 
 ```
 
@@ -111,7 +111,7 @@ HTTP1.0 的报文有两种类型：请求和响应。其报文格式分别为：
 请求首部字段(可选)
 空行
 body(只对Post请求有效)
-复制代码
+
 
 ```
 
@@ -124,7 +124,7 @@ Connection Keep-Alive
 ...// 其他header
 
 key=iOS
-复制代码
+
 
 ```
 
@@ -135,7 +135,7 @@ HTTP/版本号 返回码 返回码描述
 应答首部字段(可选)
 空行
 body
-复制代码
+
 
 ```
 
@@ -147,7 +147,7 @@ Content-Type text/html;charset=UTF-8
 ...// 其他header
 
 <html>...
-复制代码
+
 
 ```
 
@@ -165,7 +165,7 @@ path: 表示所访问的资源在目标主机上的储存路径；
 query: 表示查询条件；
 
 例如： http://www.baidu.com/search?words=Baidu
-复制代码
+
 
 ```
 
@@ -180,7 +180,7 @@ HEAD：获取报文首部，与GET相比，不返回报文主体部分
 OPTIONS：询问支持的方法
 TRACE：追踪请求的路径；
 CONNECT：要求在与代理服务器通信时建立隧道，使用隧道进行TCP通信。主要使用SSL和TLS将数据加密后通过网络隧道进行传输。
-复制代码
+
 
 ```
 
@@ -268,7 +268,7 @@ Referer：告知服务器请求是从哪个页面发起的。例如在百度首�
 User-Agent：将发起请求的浏览器和代理名称等信息发送给服务端，例如：
 User-Agent: Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36
 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36
-复制代码
+
 
 ```
 
@@ -294,7 +294,7 @@ Server：告知服务端当前使用的HTTP服务器应用程序的相关信息�
 
 WWW-Authenticate：告知客户端适用于所访问资源的认证方案，如Basic或Digest。401的响应中肯定带有
 WWW-Authenticate字段。
-复制代码
+
 
 ```
 
@@ -317,7 +317,7 @@ Content-Type：告知客户端资源的媒体类型，取值同请求首部字�
 Expires：告知客户端资源的失效日期。可用于对缓存的处理。
   
 Last-Modified：告知客户端资源最后一次修改的时间。
-复制代码
+
 
 ```
 
@@ -342,7 +342,7 @@ Upgrade: 用于检查HTTP协议或其他协议是否有可使用的更高版本�
 Via：追踪客户端和服务端之间的报文的传输路径，还可避免会环的发生，所以在经过代理时必须添加此字段。
 
 Warning：Http/1.1的报文字段，从Http/1.0的AfterRetry演变而来，用来告知用户一些与缓存相关的警告信息。
-复制代码
+
 
 ```
 
@@ -366,7 +366,7 @@ Secure: 仅在HTTPS安全通信是才会发送Cookie；
 HttpOnly: 使Cookie不能被JS脚本访问；
 
 如：Set-Cookie:BDSVRBFE=Go; max-age=10; domain=m.baidu.com; path=/
-复制代码
+
 
 ```
 
