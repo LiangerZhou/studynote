@@ -219,7 +219,7 @@ public ConcurrentHashMap(int initialCapacity,float loadFactor, int concurrencyLe
         ++c;
     // 默认 MIN_SEGMENT_TABLE_CAPACITY 是 2，这个值也是有讲究的，因为这样的话，对于具体的槽上，
     // 插入一个元素不至于扩容，插入第二个的时候才会扩容
-    int cap = MIN_SEGMENT_TABLE_CAPACITY; 
+    int cap = MIN_SEGMENT_TABLE_CAPACITY;
     while (cap < c)
         cap <<= 1;
 
@@ -667,7 +667,7 @@ final Node<K,V>[] resize() {
                 // 如果是红黑树，具体我们就不展开了
                 else if (e instanceof TreeNode)
                     ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
-                else { 
+                else {
                     // 这块是处理链表的情况，
                     // 需要将此链表拆成两个链表，放到新的数组中，并且保留原来的先后顺序
                     // loHead、loTail 对应一条链表，hiHead、hiTail 对应另一条链表，代码还是比较简单的
