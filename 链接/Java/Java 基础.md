@@ -193,7 +193,6 @@ public static Integer valueOf(int i) {
         return IntegerCache.cache[i + (-IntegerCache.low)];
     return new Integer(i);
 }
-
 ```
 
 **基本类型对应的缓冲池如下：**
@@ -222,8 +221,6 @@ public final class String
     /** The value is used for character storage. */
     private final char value[];
 }
-
-
 ```
 
 在 Java 9 之后，String 类的实现改用 byte 数组存储字符串，同时使用 `coder` 来标识使用了哪种编码。
@@ -237,8 +234,6 @@ public final class String
     /** The identifier of the encoding used to encode the bytes in {@code value}. */
     private final byte coder;
 }
-
-
 ```
 
 ### 2. 不可变的好处
@@ -315,7 +310,6 @@ System.out.println(s1 == s2);           // false
 String s3 = s1.intern();
 String s4 = s1.intern();
 System.out.println(s3 == s4);           // true
-
 ```
 
 如果是采用 "bbb" 这种字面量的形式创建字符串，会自动地将字符串放入 String Pool 中。
@@ -324,7 +318,6 @@ System.out.println(s3 == s4);           // true
 String s5 = "bbb";
 String s6 = "bbb";
 System.out.println(s5 == s6);  // true
-
 ```
 
 在 Java 7 之前，String Pool 被放在运行时常量池中，它属于永久代。而在 Java 7，String Pool 被移到堆中。这是因为永久代的空间有限，在大量使用字符串的场景下会导致 OutOfMemoryError 错误。
@@ -387,7 +380,6 @@ public String(String original) {
     this.value = original.value;
     this.hash = original.hash;
 }
-
 ```
 
 ## 3. 运算
@@ -419,7 +411,6 @@ public class Dog {
         return super.toString();
     }
 }
-
 ```
 
 ```java
@@ -439,7 +430,6 @@ public class PassByValueExample {
         System.out.println(dog.getName());          // B
     }
 }
-
 ```
 
 如果在方法中改变对象的字段值会改变原对象该字段值，因为改变的是同一个地址指向的内容。
@@ -456,7 +446,6 @@ class PassByValueExample {
         dog.setName("B");
     }
 }
-
 ```
 
 [StackOverflow: Is Java “pass-by-reference” or “pass-by-value”?](https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value)
@@ -469,14 +458,12 @@ Java 不能隐式执行向下转型，因为这会使得精度降低。
 
 ```java
 // float f = 1.1;
-
 ```
 
 1.1f 字面量才是 float 类型。
 
 ```java
 float f = 1.1f;
-
 ```
 
 ### 3.隐式类型转换
@@ -516,7 +503,6 @@ switch (s) {
         System.out.println("bbb");
         break;
 }
-
 ```
 
 switch 不支持 long，是因为 switch 的设计初衷是对那些只有少数的几个值进行等值判断，如果值过于复杂，那么还是用 if 比较合适。
@@ -545,7 +531,6 @@ Java 中有三个访问权限修饰符：private、protected 以及 public，**�
 public class AccessExample {
     public String id;
 }
-
 ```
 
 可以使用公有的 getter 和 setter 方法来替换公有字段，这样的话就可以控制对字段的修改行为。
@@ -563,7 +548,6 @@ public class AccessExample {
         this.id = Integer.valueOf(id);
     }
 }
-
 ```
 
 但是也有例外，如果是包级私有的类或者私有的嵌套类，那么直接暴露成员不会有特别大的影响。
@@ -584,7 +568,6 @@ public class AccessWithInnerClassExample {
         return innerClass.x;  // 直接访问
     }
 }
-
 ```
 
 ### 2. 抽象类与接口
@@ -607,7 +590,6 @@ public abstract class AbstractClassExample {
         System.out.println("func2");
     }
 }
-
 ```
 
 ```java
@@ -617,7 +599,6 @@ public class AbstractExtendClassExample extends AbstractClassExample {
         System.out.println("func1");
     }
 }
-
 ```
 
 * **2. 接口**
@@ -647,7 +628,6 @@ public interface InterfaceExample {
     // protected int l = 0; // Modifier 'protected' not allowed here
     // private void fun3(); // Modifier 'private' not allowed here
 }
-
 ```
 
 ```java
@@ -657,7 +637,6 @@ public class InterfaceImplementExample implements InterfaceExample {
         System.out.println("func1");
     }
 }
-
 ```
 
 * **3. 比较**
@@ -885,9 +864,8 @@ public final void wait() throws InterruptedException
             return z == that.z;
         }
     }
-
-    ```
-
+```
+  
 * **4. 两个对象值相同 (x.equals(y) == true)，但却可有不同的 hash code，这句话对不对?**
 
     **因为 hashCode() 方法和 equals() 方法都可以通过自定义类重写**，是可以做到 equals 相同，但是 hashCode 不同的
@@ -919,7 +897,6 @@ public int hashCode() {
     result = 31 * result + z;
     return result;
 }
-
 ```
 
 ### 5. toString()
@@ -935,13 +912,11 @@ public class ToStringExample {
         this.number = number;
     }
 }
-
 ```
 
 ```java
 ToStringExample example = new ToStringExample(123);
 System.out.println(example.toString());
-
 ```
 
 ```java
@@ -959,13 +934,11 @@ public class CloneExample {
     private int a;
     private int b;
 }
-
 ```
 
 ```java
 CloneExample e1 = new CloneExample();
 // CloneExample e2 = e1.clone(); // 'clone()' has protected access in 'java.lang.Object'
-
 ```
 
 重写 clone() 得到以下实现：
@@ -980,7 +953,6 @@ public class CloneExample {
         return (CloneExample)super.clone();
     }
 }
-
 ```
 
 ```java
@@ -990,12 +962,10 @@ try {
 } catch (CloneNotSupportedException e) {
     e.printStackTrace();
 }
-
 ```
 
 ```java
 java.lang.CloneNotSupportedException: CloneExample
-
 ```
 
 以上抛出了 CloneNotSupportedException，这是因为 CloneExample 没有实现 Cloneable 接口。
@@ -1012,7 +982,6 @@ public class CloneExample implements Cloneable {
         return super.clone();
     }
 }
-
 ```
 
 * **2. 浅拷贝**
@@ -1044,7 +1013,6 @@ public class ShallowCloneExample implements Cloneable {
         return (ShallowCloneExample) super.clone();
     }
 }
-
 ```
 
 ```java
@@ -1057,7 +1025,6 @@ try {
 }
 e1.set(2, 222);
 System.out.println(e2.get(2)); // 222
-
 ```
 
 * **3. 深拷贝**
@@ -1094,7 +1061,6 @@ public class DeepCloneExample implements Cloneable {
         return result;
     }
 }
-
 ```
 
 ```java
@@ -1107,7 +1073,6 @@ try {
 }
 e1.set(2, 222);
 System.out.println(e2.get(2)); // 2
-
 ```
 
 * **4. clone() 的替代方案**
@@ -1140,7 +1105,6 @@ public class CloneConstructorExample {
         return arr[index];
     }
 }
-
 ```
 
 ```java
@@ -1148,7 +1112,6 @@ CloneConstructorExample e1 = new CloneConstructorExample();
 CloneConstructorExample e2 = new CloneConstructorExample(e1);
 e1.set(2, 222);
 System.out.println(e2.get(2)); // 2
-
 ```
 
 ## 6. 关键字
@@ -1195,7 +1158,6 @@ public class A {
         int y = A.y;
     }
 }
-
 ```
 
 * **2. 静态方法**
@@ -1208,7 +1170,6 @@ public abstract class A {
     }
     // public abstract static void func2();  // Illegal combination of modifiers: 'abstract' and 'static'
 }
-
 ```
 
 只能访问所属类的静态字段和静态方法，方法中不能有 this 和 super 关键字。
@@ -1224,7 +1185,6 @@ public class A {
         // int b = this.y;     // 'A.this' cannot be referenced from a static context
     }
 }
-
 ```
 
 * **3. 静态语句块**
@@ -1242,12 +1202,10 @@ public class A {
         A a2 = new A();
     }
 }
-
 ```
 
 ```java
 123
-
 ```
 
 * **4. 静态内部类**
@@ -1273,7 +1231,6 @@ public class OuterClass {
         StaticInnerClass staticInnerClass = new StaticInnerClass();
     }
 }
-
 ```
 
 静态内部类不能访问外部类的非静态的变量和方法。
@@ -1284,7 +1241,6 @@ public class OuterClass {
 
 ```java
 import static com.xxx.ClassName.*
-
 ```
 
 * **6. 初始化顺序**
@@ -1352,7 +1308,6 @@ ClassCastException 类型转换异常
 ConcurrentModificationException 同步修改异常，遍历一个集合的时候，删除集合的元素，就会抛出该异常
 IndexOutOfBoundsException 数组下标越界异常
 NegativeArraySizeException 为数组分配的空间是负数异常
-
 ```
 
 **一般异常又叫做可查异常（受检异常），在编译过程中，必须进行处理，要么捕捉，要么通过 throws 抛出去.**
@@ -1380,7 +1335,6 @@ public class Box<T> {
     public void set(T t) { this.t = t; }
     public T get() { return t; }
 }
-
 ```
 
 * [Java 泛型详解](http://www.importnew.com/24029.html)
@@ -1545,7 +1499,6 @@ public class HelloWorld {
 
     }
 }
-
 ```
 
 ### 11. Anonymous Inner Class (匿名内部类) 是否可以 extends(继承) 其它类，是否可以 implements(实现)interface(接口)
@@ -1579,7 +1532,6 @@ public class HelloWorld {
 
     }
 }
-
 ```
 
 ### 12.  内部类可以引用外部类的成员吗？有没有什么限制
@@ -1857,7 +1809,6 @@ for (int i = 1; i<100; i++)
 
 ```java
 Arrays.asList( "a", "b", "d" ).forEach( e -> System.out.println( e ) );
-
 ```
 
 如果 Lambda 表达式需要更复杂的语句块，则可以使用花括号将该语句块括起来，类似于 Java 中的函数体，例如：
@@ -1867,14 +1818,12 @@ Arrays.asList( "a", "b", "d" ).forEach( e -> {
     System.out.print( e );
     System.out.print( e );
 } );
-
 ```
 
 Lambda 表达式有返回值，返回值的类型也由编译器推理得出。如果 Lambda 表达式中的语句块只有一行，则可以不用使用 return 语句，下列两个代码片段效果相同：
 
 ```java
 Arrays.asList( "a", "b", "d" ).sort( ( e1, e2 ) -> e1.compareTo( e2 ) );
-
 ```
 
 和
@@ -1884,7 +1833,6 @@ Arrays.asList( "a", "b", "d" ).sort( ( e1, e2 ) -> {
     int result = e1.compareTo( e2 );
     return result;
 } );
-
 ```
 
 ### 2. 函数式接口
@@ -1903,7 +1851,6 @@ public interface FunctionalDefaultMethods {
     default void defaultMethod() {
     }
 }
-
 ```
 
 ### 3. 接口的默认方法和静态方法
@@ -1957,7 +1904,6 @@ Optional< String > fullName = Optional.ofNullable( null );
 System.out.println( "Full Name is set? " + fullName.isPresent() );
 System.out.println( "Full Name: " + fullName.orElseGet( () -> "[none]" ) );
 System.out.println( fullName.map( s -> "Hey " + s + "!" ).orElse( "Hey Stranger!" ) );
-
 ```
 
 如果 Optional 实例持有一个非空值，则 isPresent() 方法返回 true，否则返回 false；orElseGet() 方法，Optional 实例持有 null，则可以接受一个 lambda 表达式生成的默认值；map() 方法可以将现有的 Opetional 实例的值转换成新的值；orElse() 方法与 orElseGet() 方法类似，但是在持有 null 的时候返回传入的默认值。
@@ -1975,7 +1921,6 @@ final long totalPointsOfOpenTasks = tasks
     .sum();
 
 System.out.println( "Total points: " + totalPointsOfOpenTasks );
-
 ```
 
 ### 12. Date/Time API

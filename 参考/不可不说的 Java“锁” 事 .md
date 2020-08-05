@@ -1,6 +1,6 @@
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://tech.meituan.com/2018/11/15/java-lock.html
 
-## 前言
+## Java锁
 
 Java 提供了种类丰富的锁，每种锁因其特性的不同，在适当的场景下能够展现出非常高的效率。本文旨在对锁相关源码（本文中的源码来自 JDK 8 和 Netty 3.10.6）、使用场景进行举例，为读者介绍主流锁的知识点，以及不同的锁的适用场景。
 
@@ -316,10 +316,10 @@ Monitor 是线程私有的数据结构，每一个线程都有一个可用 monit
 		if (w == 0 || current != getExclusiveOwnerThread()) 
 			return false;
 		if (w + exclusiveCount(acquires) > MAX_COUNT)    
-      throw new Error("Maximum lock count exceeded");
-
-    setState(c + acquires);
-    return true;
+	  throw new Error("Maximum lock count exceeded");
+	
+	setState(c + acquires);
+	return true;
   }
   if (writerShouldBlock() || !compareAndSetState(c, c + acquires)) 
 		return false;

@@ -105,7 +105,6 @@ public class ReferenceCountingGC {
         objectB.instance = objectA;
     }
 }
-
 ```
 
 **正因为循环引用的存在，因此 Java 虚拟机不适用引用计数算法。**

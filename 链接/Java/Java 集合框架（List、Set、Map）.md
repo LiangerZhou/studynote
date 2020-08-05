@@ -143,8 +143,6 @@ public static <T> List<T> asList(T... a)
 2
 Integer[] arr = {1, 2, 3};
 List list = Arrays.asList(arr);
-
-
 ```
 
 也可以使用以下方式生成 List。
@@ -152,8 +150,6 @@ List list = Arrays.asList(arr);
 ```
 1
 List list = Arrays.asList(1,2,3);
-
-
 ```
 
 源码分析
@@ -266,8 +262,6 @@ System.arraycopy(elementData, index+1, elementData, index, numMoved);
 elementData[--size] = null; // clear to let GC do its work
 return oldValue;
 }
-
-
 ```
 
 需要调用 System.arraycopy() 将 index+1 后面的元素都复制到 index 位置上，**复制的代价很高。**
@@ -303,8 +297,6 @@ if (modCount != expectedModCount) {
 throw new ConcurrentModificationException();
 }
 }
-
-
 ```
 
 ### 构造器
@@ -355,8 +347,6 @@ a[i] = s.readObject();
 }
 }
 }
-
-
 ```
 
 ```java
@@ -445,8 +435,6 @@ lock.unlock();
 final void setArray(Object[] a) {
 array = a;
 }
-
-
 ```
 
 ```java
@@ -717,8 +705,6 @@ modCount++;
 addEntry(0, null, value, 0);
 return null;
 }
-
-
 ```
 
 使用链表的头插法，也就是新的键值对插在链表的头部，而不是链表的尾部。
@@ -740,7 +726,6 @@ Entry<K,V> e = table[bucketIndex];
 table[bucketIndex] = new Entry<>(hash, key, value, e);
 size++;
 }
-
 ```
 
 ```
@@ -750,8 +735,6 @@ next = n;
 key = k;
 hash = h;
 }
-
-
 ```
 
 #### 补充：hashmap 里 hash 方法的高位优化：
@@ -775,8 +758,6 @@ hash = h;
 ```
 int hash = hash(key);
 int i = indexFor(hash, table.length);
-
-
 ```
 
 **4.1 计算 hash 值**
@@ -802,8 +783,6 @@ return h ^ (h >>> 7) ^ (h >>> 4);
 public final int hashCode() {
 return Objects.hashCode(key) ^ Objects.hashCode(value);
 }
-
-
 ```
 
 **4.2 取模**
@@ -821,8 +800,6 @@ x-1 : 00001111
 y : 10110010
 x-1 : 00001111
 y&(x-1) : 00000010
-
-
 ```
 
 这个性质和 y 对 x 取模效果是一样的：
@@ -831,7 +808,6 @@ y&(x-1) : 00000010
 y : 10110010
 x : 00010000
 y%x : 00000010
-
 ```
 
 我们知道，位运算的代价比求模运算小的多，因此在进行这种计算时用位运算的话能带来更高的性能。
@@ -842,8 +818,6 @@ y%x : 00000010
 static int indexFor(int h, int length) {
 return h & (length-1);
 }
-
-
 ```
 
 **当 length 总是 2 的 n 次方时，h& (length-1) 运算等价于对 length 取模，也就是 h%length**，但是 & 比 % 具有更高的效率。这看上去很简单，其实比较有玄机的，我们举个例子来说明：
@@ -908,8 +882,6 @@ table[bucketIndex] = new Entry<>(hash, key, value, e);
 if (size++ >= threshold)
 resize(2 * table.length);
 }
-
-
 ```
 
 扩容使用 resize() 实现，需要注意的是，扩容操作同样需要把 oldTable 的所有键值对重新插入 newTable 中，因此这一步是很费时的。
@@ -945,7 +917,6 @@ e = next;
 }
 }
 }
-
 ```
 
 ### 扩容 - 重新计算桶下标
@@ -1251,7 +1222,6 @@ cache.get(1);
 cache.put(4, "d");
 System.out.println(cache.keySet());
 }
-
 ```
 
 ```java
@@ -1385,7 +1355,6 @@ WeakHashMap 主要用来实现缓存，通过使用 WeakHashMap 来引用缓存�
 
 ```java
 private static class Entry<K,V> extends WeakReference<Object> implements Map.Entry<K,V>
-
 ```
 
 ### ConcurrentCache
@@ -1481,53 +1450,27 @@ ListIterator 有什么特点
 ==
 
 * [https://github.com/CyC2018/CS-Notes/blob/master/docs/notes/Java 容器. md](https://github.com/CyC2018/CS-Notes/blob/master/docs/notes/Java%20%E5%AE%B9%E5%99%A8.md)
+
 * Eckel B. Java 编程思想 [M]. 机械工业出版社, 2002.
+
 * [Java Collection Framework](https://www.w3resource.com/java-tutorial/java-collections.php)
+
 * [Iterator 模式](https://openhome.cc/Gossip/DesignPattern/IteratorPattern.htm)
+
 * [Java 8 系列之重新认识 HashMap](https://tech.meituan.com/java_hashmap.html)
+
 * [What is difference between HashMap and Hashtable in Java?](http://javarevisited.blogspot.hk/2010/10/difference-between-hashmap-and.html)
+
 * [Java 集合之 HashMap](http://www.zhangchangle.com/2018/02/07/Java%E9%9B%86%E5%90%88%E4%B9%8BHashMap/)
+
 * [The principle of ConcurrentHashMap analysis](http://www.programering.com/a/MDO3QDNwATM.html)
+
 * [探索 ConcurrentHashMap 高并发性的实现机制](https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/)
+
 * [HashMap 相关面试题及其解答](https://www.jianshu.com/p/75adf47958a7)
+
 * [Java 集合细节（二）：asList 的缺陷](http://wiki.jikexueyuan.com/project/java-enhancement/java-thirtysix.html)
+
 * [Java Collection Framework – The LinkedList Class](http://javaconceptoftheday.com/java-collection-framework-linkedlist-class/)
 
-关注我
-===
-
-本人目前为后台开发工程师，主要关注 Python 爬虫，后台开发等相关技术。
-
-**原创博客主要内容：**
-
-* 笔试面试复习知识点手册
-* Leetcode 算法题解析（前 150 题）
-* 剑指 offer 算法题解析
-* Python 爬虫相关实战
-* 后台开发相关实战
-
-**同步更新以下几大博客：**
-
-* Csdn：
-
-[http://blog.csdn.net/qqxx6661](http://blog.csdn.net/qqxx6661)
-
-拥有专栏：Leetcode 题解（Java/Python）、Python 爬虫开发
-
-* 知乎：
-
-[https://www.zhihu.com/people/yang-zhen-dong-1/](https://www.zhihu.com/people/yang-zhen-dong-1/)
-
-拥有专栏：码农面试助攻手册
-
-* 掘金：
-
-[https://juejin.im/user/5b48015ce51d45191462ba55](https://juejin.im/user/5b48015ce51d45191462ba55)
-
-* 简书：
-
-[https://www.jianshu.com/u/b5f225ca2376](https://www.jianshu.com/u/b5f225ca2376)
-
-* 个人公众号：Rude3Knife
-
-![](https://img-blog.csdnimg.cn/20190108201638256.png)
+  

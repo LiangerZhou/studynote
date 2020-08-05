@@ -1,9 +1,6 @@
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483870&idx=1&sn=2d2f90086ac9f86d41504957005bd94f&chksm=fbdb185fccac9149d791dcce4f3de8dab14d93568e4e5eb45e41c6a5ad406cd51b6a7752411b&scene=21#wechat_redirect
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4HwJnmoO8ApkfycQIaNNoHtTjFcqUBZqVrZn7CSZDA4mdvkgyFAcxaf2A/640?wx_fmt=jpeg)题图
-
-前言
-==
+# 查找算法总结及其算法实现 Python_Java
 
 本文总结了常用的查找算法，内容包括：
 
@@ -92,7 +89,7 @@ Ci：找到第 i 个数据元素时已经比较过的次数。
 
 Java 实现：
 
-```
+```java
 public static int SequenceSearch(int a[], int value, int n) {
         for(int i=1;i<n;i++) {
             if(a[i]==value) {
@@ -101,8 +98,6 @@ public static int SequenceSearch(int a[], int value, int n) {
         }
         return -1;
     }
-
-
 ```
 
 ### 2. 二分查找
@@ -123,7 +118,7 @@ public static int SequenceSearch(int a[], int value, int n) {
 
 Java 实现：
 
-```
+```java
 // 迭代版
 public static int BinarySearch(int a[], int value, int n) {
         int low = 0;
@@ -182,22 +177,18 @@ public int firstOccurrenceRecur(int[] nums, int target, int low, int hi
         return firstOccurrenceRecur(nums,target,low,mid-1);
     }
 }
-
-
 ```
 
 ### 3. 插值查找
 
 通过类比，我们可以将二分查找的点改进为如下：
 
-```
+```java
 mid=low+(high-low)*(key-a[low])/(a[high]-a[low])//(1/2)换为(key-a[low])/(a[high]-a[low])
-
-
 ```
 
-**也就是将上述的比例参数 1/2 改进为自适应的，根据关键字在整个有序表中所处的位置，让 mid 值的变化更靠近关键字 key，这样也就间接地减少了比较次数。**  
-　　  
+**也就是将上述的比例参数 1/2 改进为自适应的，根据关键字在整个有序表中所处的位置，让 mid 值的变化更靠近关键字 key，这样也就间接地减少了比较次数。** 
+
 **基本思想：**
 
 基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，差值查找也属于有序查找。
@@ -248,7 +239,7 @@ https://blog.csdn.net/zsw12013/article/details/50003505
 
 Java：
 
-```
+```java
 public final static int MAXSIZE = 20; // fib length
     public static int[] fibonacci() {  
         int[] f = new int[MAXSIZE];  
@@ -327,13 +318,11 @@ public final static int MAXSIZE = 20; // fib length
         }  
         return -1;  
     }    
-
-
 ```
 
 Python：
 
-```
+```python
 MAXSIZE = 20
 
 def fibonacci():  # 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
@@ -369,8 +358,6 @@ def fibonacciSearch(array, value):
 if __name__ == '__main__':
     a = [1, 3, 5, 6, 7, 88]
     print(fibonacciSearch(a, 2))
-
-
 ```
 
 ### 5. 树表查找
@@ -445,7 +432,7 @@ https://riteme.github.io/blog/2016-3-12/2-3-tree-and-red-black-tree.html
 
 红黑树的性质：整个树完全黑色平衡，即从根节点到所以叶子结点的路径上，黑色链接的个数都相同（2-3 树的第 2）性质，从根节点到叶子节点的距离都相等）。
 
-![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4Hwhe7EDKP5yCyOwrlibebZVRKYBvRibLLHqnBibrNgyJK0xzXreTNMbGEhA/640?wx_fmt=png)这里写图片描述
+![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4Hwhe7EDKP5yCyOwrlibebZVRKYBvRibLLHqnBibrNgyJK0xzXreTNMbGEhA/640?wx_fmt=png)红黑树
 
 **复杂度分析：**
 
@@ -454,7 +441,7 @@ https://riteme.github.io/blog/2016-3-12/2-3-tree-and-red-black-tree.html
 下图是一个典型的红黑树，从中可以看到最长的路径 (红黑相间的路径) 是最短路径的 2 倍：  
 　　  
 
-![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4HwCtcjZ1G1Q6sKzWvdy67YLUDsibUvvbsVk3bmck2GIKAl2E6uGK4I7pQ/640?wx_fmt=png)这里写图片描述
+![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4HwCtcjZ1G1Q6sKzWvdy67YLUDsibUvvbsVk3bmck2GIKAl2E6uGK4I7pQ/640?wx_fmt=png)复杂度分析
 
 红黑树这种数据结构应用十分广泛，在多种编程语言中被用作符号表的实现，如：
 
@@ -541,7 +528,7 @@ step2 查找分两个部分：先对索引表进行二分查找或顺序查找�
 
 Java 完整代码，带有测试用例：
 
-```
+```java
 public class test {
     public static int SequenceSearch(int a[], int value, int n) {
         for(int i=1;i<n;i++) {
@@ -709,126 +696,3 @@ public class test {
 ======
 
 http://www.cnblogs.com/maybe2030/p/4715035.html#_label6
-
------ 正文结束 -----
-================
-
-**全复习手册文章导航：通过以下两种途径查看**
-
-*   关注我的公众号：Rude3Knife 点击公众号下方：技术推文——面试冲刺
-    
-*   全复习手册文章导航 (CSDN)
-    
-
-**知识点复习手册文章推荐**
-
-*   [Java 基础知识点面试手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483730&idx=1&sn=de2751593468f470902b698c19f8987f&chksm=fbdb18d3ccac91c56939e55cd1f0ca1b4753fd178d229440ecbf89752f5e0d518acd453e2497&scene=21#wechat_redirect)  
-    
-*   [Java 基础知识点面试手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483730&idx=2&sn=5610afab774b4114110c993fd0fdc43d&chksm=fbdb18d3ccac91c5e3d2978e3a780b14d09e97c997a5c50410d1adb1930da76f40238d8f409d&scene=21#wechat_redirect)  
-    
-*   [Java 容器（List、Set、Map）知识点快速复习手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483743&idx=1&sn=cc38aab9429905ddc757b529a386d1dd&chksm=fbdb18deccac91c8d0be8b3ae0e4266bb08ead73a2e57f2c977705e7b26ceaaec7aff5d5c67c&scene=21#wechat_redirect)  
-    
-*   [Java 容器（List、Set、Map）知识点快速复习手册（中）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483753&idx=1&sn=74b8180dc1a1804c355174ed34e6e33d&chksm=fbdb18e8ccac91fe3ce31ed9713bf23598e7f98dcb6d5a22b79aa92b1c773134bfebe71fbbca&scene=21#wechat_redirect)  
-    
-*   [Java 容器（List、Set、Map）知识点快速复习手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483762&idx=1&sn=1f121db6552a2e77d53c500fa812fc6c&chksm=fbdb18f3ccac91e58229dd3efd09c876722d58863c2b6ff6d444b0825a955a776ced947d8470&scene=21#wechat_redirect)  
-    
-*   [Redis 基础知识点快速复习手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483768&idx=1&sn=ea83244e4b9f1d6f912ca0aadab74466&chksm=fbdb18f9ccac91efe9e32704ac3d69cf1ad390ddae0f169c118ea8b9da91c6e4e6e849677a6d&scene=21#wechat_redirect)  
-    
-*   [Redis 基础知识点快速复习手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483773&idx=1&sn=6bbd589e174b5d6f8bb3d6b242eb6132&chksm=fbdb18fcccac91eaa8c9d941c1d3f8d2f3874841c417d30e3ccd185b1494d51ea2fdf384c876&scene=21#wechat_redirect)  
-    
-*   [Java 并发知识点快速复习手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483778&idx=1&sn=124096cdc14958b8cdae04b805d00fdc&chksm=fbdb1803ccac9115e967cd538a8008a19dacea286a632284d2e8765c6b8bd48f4f235caddd29&scene=21#wechat_redirect)
-    
-*   [Java 并发知识点快速复习手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483782&idx=1&sn=a0cd333ce6a32fa3f29cfae5fb6fe7e1&chksm=fbdb1807ccac9111003947936006f02972b45a6a6592f6d107f4dceb6b19c82fdff25b3ff355&scene=21#wechat_redirect)  
-    
-*   [Java 虚拟机知识点快速复习手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483795&idx=1&sn=4f41e144656b6b6ab6089cd558f6f5ab&chksm=fbdb1812ccac9104e425b3984659ac422afbf0505268645be65935c33bad808d4571dfed5d1f&scene=21#wechat_redirect)  
-    
-*   [Java 虚拟机知识点快速复习手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483801&idx=1&sn=97db60faa634ff18e335ba1f0851969c&chksm=fbdb1818ccac910e956fac57c4cd2b6c1906152aece1f5720aaf52f483b48d31b9506c3d34e5&scene=21#wechat_redirect)  
-    
-*   [HTTP 应知应会知识点复习手册（上）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483812&idx=1&sn=a0f74e7ea7672b53b55ae20706b318ab&chksm=fbdb1825ccac913381547a47beb4acf7f895200d758413e1bfd168c098bbc0f0b1e83f04c60f&scene=21#wechat_redirect)  
-    
-*   [HTTP 应知应会知识点复习手册（下）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483816&idx=1&sn=0c25a0ff097009c8471c52ff72c857f7&chksm=fbdb1829ccac913f711d9f2cc4ab8759152e3c4a77f571fc9dd2178039c08038b5b734339894&scene=21#wechat_redirect)  
-    
-*   [计算机网络基础知识点快速复习手册](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483823&idx=1&sn=f3b86b671dc6c8619c0a55aa4c587b72&chksm=fbdb182eccac91386a03e647bcb17a4b1ed72ffc94035760b753e76ad49b9e7deeb724637c85&scene=21#wechat_redirect)  
-    
-*   [面试常问的小算法总结](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483828&idx=1&sn=2903902c95a8f4b9895ac86518e64239&chksm=fbdb1835ccac91236c3b7260608a4cf5b58a0a4fc49a5367c93ccf11d19eed1c043b9ec6004b&scene=21#wechat_redirect)  
-    
-*   [快速梳理 23 种常用的设计模式（上篇）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483836&idx=1&sn=eb304c4abf38d9f7883a81b5f9e62693&chksm=fbdb183dccac912bc4fb7539f42fb917264e106468f9a5e681bef10e4ef73a3fe8d391c29c82&scene=21#wechat_redirect)  
-    
-*   [快速梳理常用的设计模式（中篇）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483847&idx=1&sn=51d00cbd3cc3d9a84c0b6c331f035d65&chksm=fbdb1846ccac9150d46dcc77f719a23799c3a5eda4de19f0821be2cff93a9c9878b574a01338&scene=21#wechat_redirect)  
-    
-*   [快速梳理 23 种常用的设计模式（下篇）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483851&idx=1&sn=ee66708c4bb87c85e81b03ae6a08af68&chksm=fbdb184accac915ca9529acf2649c92030efcd6b5796e88f5d0d6dd0a964b10e32aab983d27e&scene=21#wechat_redirect)  
-    
-*   [排序算法最强总结及其代码实现（Python/Java）](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483865&idx=1&sn=b0a4497f063b9b7b450db80748254bfc&chksm=fbdb1858ccac914ed0517beb411c2b17f50771be00daee32e11b7d40d57308e36a3a687c62c7&scene=21#wechat_redirect)  
-    
-*   [海量数据处理问题知识点复习手册](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483860&idx=1&sn=e211f83b5fea6abc87c724579a28a883&chksm=fbdb1855ccac914371ba9f7da9db2f072964c1eada5176312a00eb7d19522954a0bff0f0e1f7&scene=21#wechat_redirect)  
-    
-*   [阿里巴巴 Java 开发手册阅读笔记](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483796&idx=1&sn=b06e84f587a61f0f827c038d6e48de0e&chksm=fbdb1815ccac91032530f28473fc219bec68759b3fb54d7b21507238b6478b270f0f78b9d915&scene=21#wechat_redirect)  
-    
-*   [双非硕士的春招秋招经验总结——对校招，复习以及面试心态的理解](http://mp.weixin.qq.com/s?__biz=MzU1NTA0NTEwMg==&mid=2247483669&idx=1&sn=9d45d0a80c55c2b81611e150b059fb2f&chksm=fbdb1894ccac9182a43949d445accee91afab50f27c11906ae3d3121e24908469424d0726369&scene=21#wechat_redirect)
-    
-*   …… 等（请查看全复习手册导航）
-    
-
-关注我
-===
-
-我是蛮三刀把刀，目前为后台开发工程师。主要关注后台开发，网络安全，Python 爬虫等技术。
-
-来微信和我聊聊：yangzd1102
-
-Github：https://github.com/qqxx6661
-
-### 原创博客主要内容
-
-*   笔试面试复习知识点手册
-    
-*   Leetcode 算法题解析（前 150 题）
-    
-*   剑指 offer 算法题解析
-    
-*   Python 爬虫相关技术分析和实战
-    
-*   后台开发相关技术分析和实战
-    
-
-**同步更新以下博客**
-
-**1. Csdn**
-
-http://blog.csdn.net/qqxx6661
-
-拥有专栏：
-
-*   Leetcode 题解（Java/Python）
-    
-*   Python 爬虫实战
-    
-*   Java 程序员知识点复习手册
-    
-
-**2. 知乎**
-
-https://www.zhihu.com/people/yang-zhen-dong-1/
-
-拥有专栏：
-
-*   Java 程序员面试复习手册
-    
-*   LeetCode 算法题详解与代码实现
-    
-*   后台开发实战
-    
-
-**3. 掘金**
-
-https://juejin.im/user/5b48015ce51d45191462ba55
-
-**4. 简书**
-
-https://www.jianshu.com/u/b5f225ca2376
-
-### 个人公众号：Rude3Knife
-
-![](https://mmbiz.qpic.cn/mmbiz_png/qm3R3LeH8rZvoxSt3cjHfLXuLXYcQ4HwatM3PQOQv7InQhr7x8f1SntNQZePA265QKd75Itdj5awpd2b9UyVDw/640?wx_fmt=png)个人公众号：Rude3Knife
-
-**如果文章对你有帮助，不妨收藏起来并转发给您的朋友们~**

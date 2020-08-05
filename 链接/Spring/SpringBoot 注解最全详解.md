@@ -10,7 +10,7 @@
 
 4. 减少复杂配置文件的同时亦能享受到 springIoC 容器提供的功能
 
-**一、注解详解（配备了完善的释义****）------(可采用 ctrl+F 来进行搜索哦~~~~)**
+**一、注解详解（配备了完善的释义****）
 
 @SpringBootApplication：申明让 spring boot 自动给程序进行必要的配置，这个配置等同于：
 
@@ -106,17 +106,17 @@
 
 **四、springMVC 相关注解**
 
-@RequestMapping：@RequestMapping(“/path”)表示该控制器处理所有 “/path” 的 UR L 请求。RequestMapping 是一个用来处理请求地址映射的注解，可用于类或方法上。  
-用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。该注解有六个属性：  
-params: 指定 request 中必须包含某些参数值是，才让该方法处理。  
-headers: 指定 request 中必须包含某些指定的 header 值，才能让该方法处理请求。  
-value: 指定请求的实际地址，指定的地址可以是 URI Template 模式  
-method: 指定请求的 method 类型， GET、POST、PUT、DELETE 等  
-consumes: 指定处理请求的提交内容类型（Content-Type），如 application/json,text/html;  
+@RequestMapping：@RequestMapping(“/path”)表示该控制器处理所有 “/path” 的 UR L 请求。RequestMapping 是一个用来处理请求地址映射的注解，可用于类或方法上。 
+用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。该注解有六个属性： 
+params: 指定 request 中必须包含某些参数值是，才让该方法处理。 
+headers: 指定 request 中必须包含某些指定的 header 值，才能让该方法处理请求。 
+value: 指定请求的实际地址，指定的地址可以是 URI Template 模式 
+method: 指定请求的 method 类型， GET、POST、PUT、DELETE 等 
+consumes: 指定处理请求的提交内容类型（Content-Type），如 application/json,text/html; 
 produces: 指定返回的内容类型，仅当 request 请求头中的 (Accept) 类型中包含该指定类型才返回
 
-@RequestParam：用在方法的参数前面。  
-@RequestParam  
+@RequestParam：用在方法的参数前面。 
+@RequestParam 
 String a =request.getParameter(“a”)。
 
 @PathVariable: 路径变量。如
@@ -167,10 +167,10 @@ String a =request.getParameter(“a”)。
 
 10 precision 属性和 scale 属性：precision 属性和 scale 属性一起表示精度，当字段类型为 double 时，precision 表示数值的总长度，scale 表示小数点所占的位数
 
-    具体如下：  
-   1.double 类型将在数据库中映射为 double 类型，precision 和 scale 属性无效  
-   2.double 类型若在 columnDefinition 属性中指定数字类型为 decimal 并指定精度，则最终以 columnDefinition 为准  
-   3.BigDecimal 类型在数据库中映射为 decimal 类型，precision 和 scale 属性有效  
+    具体如下： 
+   1.double 类型将在数据库中映射为 double 类型，precision 和 scale 属性无效 
+   2.double 类型若在 columnDefinition 属性中指定数字类型为 decimal 并指定精度，则最终以 columnDefinition 为准 
+   3.BigDecimal 类型在数据库中映射为 decimal 类型，precision 和 scale 属性有效 
    4.precision 和 scale 属性只在 BigDecimal 类型中有效
 
 3.@Column 标注的 columnDefinition 属性: 表示该字段在数据库中的实际类型. 通常 ORM 框架可以根据属性类型自动判断数据库中字段的类型, 但是对于 Date 类型仍无法确定数据库中字段类型究竟是 DATE,TIME 还是 TIMESTAMP. 此外, String 的默认映射类型为 VARCHAR, 如果要将 String 类型映射到特定数据库的 BLOB 或 TEXT 字段类型.
@@ -181,27 +181,27 @@ String a =request.getParameter(“a”)。
 
 @Setter：注解在属性上；为属性提供 setting 方法 @Getter：注解在属性上；为属性提供 getting 方法
 
-  1 @Data：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了 equals、canEqual、hashCode、toString 方法  
-  2   
-  3 @Setter：注解在属性上；为属性提供 setting 方法  
-  4   
-  5 @Getter：注解在属性上；为属性提供 getting 方法  
-  6   
-  7 @Log4j2 ：注解在类上；为类提供一个 属性名为 log 的 log4j 日志对象，和 @Log4j 注解类似  
-  8   
-  9 @NoArgsConstructor：注解在类上；为类提供一个无参的构造方法  
- 10   
- 11 @AllArgsConstructor：注解在类上；为类提供一个全参的构造方法  
- 12   
- 13 @EqualsAndHashCode: 默认情况下，会使用所有非瞬态 (non-transient) 和非静态 (non-static) 字段来生成 equals 和 hascode 方法，也可以指定具体使用哪些属性。  
- 14   
- 15 @toString: 生成 toString 方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。  
- 16   
- 17 @NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor  
- 18 无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，只能自己手写了  
- 19   
- 20 @NonNull：注解在属性上，如果注解了，就必须不能为 Null  
- 21   
+  1 @Data：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了 equals、canEqual、hashCode、toString 方法 
+  2 
+  3 @Setter：注解在属性上；为属性提供 setting 方法 
+  4 
+  5 @Getter：注解在属性上；为属性提供 getting 方法 
+  6 
+  7 @Log4j2 ：注解在类上；为类提供一个 属性名为 log 的 log4j 日志对象，和 @Log4j 注解类似
+  8 
+  9 @NoArgsConstructor：注解在类上；为类提供一个无参的构造方法 
+ 10 
+ 11 @AllArgsConstructor：注解在类上；为类提供一个全参的构造方法 
+ 12 
+ 13 @EqualsAndHashCode: 默认情况下，会使用所有非瞬态 (non-transient) 和非静态 (non-static) 字段来生成 equals 和 hascode 方法，也可以指定具体使用哪些属性。 
+ 14 
+ 15 @toString: 生成 toString 方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。 
+ 16 
+ 17 @NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor 
+ 18 无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，只能自己手写了 
+ 19 
+ 20 @NonNull：注解在属性上，如果注解了，就必须不能为 Null 
+ 21 
  22 @val: 注解在属性上，如果注解了，就是设置为 final 类型，可查看源码的注释知道
 
 当你在执行各种持久化方法的时候，实体的状态会随之改变，状态的改变会引发不同的生命周期事件。这些事件可以使用不同的注释符来指示发生时的回调函数。
