@@ -842,7 +842,7 @@ public final void wait() throws InterruptedException
     ```java
     public class EqualExample {
 
-       private int x;
+        private int x;
         private int y;
         private int z;
 
@@ -864,19 +864,18 @@ public final void wait() throws InterruptedException
             return z == that.z;
         }
     }
-```
-  
-* **4. 两个对象值相同 (x.equals(y) == true)，但却可有不同的 hash code，这句话对不对?**
+    ```
+  4. **两个对象值相同 (x.equals(y) == true)，但却可有不同的 hashcode，这句话对不对?**
 
-    **因为 hashCode() 方法和 equals() 方法都可以通过自定义类重写**，是可以做到 equals 相同，但是 hashCode 不同的
+​    **因为 hashCode() 方法和 equals() 方法都可以通过自定义类重写**，是可以做到 equals 相同，但是 hashCode 不同的
 
-    但是，在 Object 类的 equals() 方法中有这么一段话
+​    但是，在 Object 类的 equals() 方法中有这么一段话
 
-    翻译如下：
+​    翻译如下：
 
-    通常来讲，在重写这个方法的时候，也需要对 hashCode 方法进行重写，  
-    以此来保证这两个方法的一致性——  
-    当 equals 返回 true 的时候，这两个对象一定有相同的 hashcode.
+​    通常来讲，在重写这个方法的时候，也需要对 hashCode 方法进行重写，  
+​    以此来保证这两个方法的一致性——  
+​    当 equals 返回 true 的时候，这两个对象一定有相同的 hashcode.
 
 ### 4. hashCode()
 
@@ -898,6 +897,9 @@ public int hashCode() {
     return result;
 }
 ```
+
+
+
 
 ### 5. toString()
 
