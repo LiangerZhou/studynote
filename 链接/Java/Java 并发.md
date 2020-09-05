@@ -301,6 +301,8 @@ public static void main(String[] args) throws ExecutionException, Interru
 
 **Executor 管理多个异步任务的执行，而无需程序员显式地管理线程的生命周期。异步是指多个任务的执行互不干扰，不需要进行同步操作。**
 
+![img](https://img2018.cnblogs.com/blog/780135/201812/780135-20181218093638859-155940816.jpg)
+
 - 当前线程池大小 ：表示线程池中实际工作者线程的数量；
 
 - 最大线程池大小 （maxinumPoolSize）：表示线程池中允许存在的工作者线程的数量上限；
@@ -313,6 +315,16 @@ public static void main(String[] args) throws ExecutionException, Interru
 
 **如果无法将请求加入队列，即队列已经满了，则创建新的线程，除非创建此线程超出 maxinumPoolSize， 在这种情况下，任务将被拒绝。**
 
+> 1、如果当前线程池的线程数还没有达到基本大小(poolSize < corePoolSize)，**无论是否有空闲的线程新增一个线程处理新提交的任务；**
+>
+> 2、如果当前线程池的线程数大于或等于基本大小(poolSize >= corePoolSize) **且任务队列未满时**，就将新提交的任务提交到阻塞队列排队，等候处理workQueue.offer(command)；
+>
+> 3、如果当前线程池的线程数大于或等于基本大小(poolSize >= corePoolSize) **且任务队列满时**；
+>
+> ​		3.1、当前poolSize<maximumPoolSize，那么就**新增线程**来处理任务；
+>
+> ​		3.2、当前poolSize=maximumPoolSize，那么意味着线程池的处理能力已经达到了极限，此时需要拒绝新增加的任务。至于如何拒绝处理新增的任务，取决于线程池的饱和策略RejectedExecutionHandler。
+
 > **不用线程池的弊端**
 
 - **线程生命周期的开销非常高**。每个线程都有自己的生命周期，创建和销毁线程所花费的时间和资源可能比处理客户端的任务花费的时间和资源更多，并且还会有某些空闲线程也会占用资源。
@@ -320,6 +332,16 @@ public static void main(String[] args) throws ExecutionException, Interru
 - **程序的稳定性和健壮性会下降**，每个请求开一个线程。如果受到了恶意攻击或者请求过多 (内存不足)，程序很容易就奔溃掉了。
 
 ### 2. ThreadPoolExecutor 类
+
+> ***创建线程池的正确姿势***
+>
+> 阿里巴巴Java手册中提到避免使用Executors创建线程池，主要是避免使用其中的默认实现，那么我们可以自己直接调用ThreadPoolExecutor的构造函数来自己创建线程池。在创建的同时，给BlockQueue指定容量就可以了：
+>
+> ```java
+> private static ExecutorService executor = new ThreadPoolExecutor(10, 10, 60L, TimeUnit.SECONDS, new ArrayBlockingQueue(10));
+> ```
+
+
 
 实现了 Executor 接口，是用的最多的线程池，下面是已经默认实现的三种：
 
