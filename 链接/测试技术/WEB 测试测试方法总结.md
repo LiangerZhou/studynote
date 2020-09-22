@@ -30,10 +30,6 @@
 　　（3）安全性检查：不能直接输入，就 copy，是否数据检验出错？  
 　　4、信息重复: 在一些需要命名，且名字应该唯一的信息输入重复的名字或 ID，看系统有没有处理，会否报错，重名包括是否区分大小写，以及在输入内容的前后输入空格，系统是否作出正确处理.
 
-2
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **二、搜索功能**
 
 　　若查询条件为输入框，则参考输入框对应类型的测试方法  
@@ -45,12 +41,6 @@
 　　2、组合测试：  
 　　（1）不同查询条件之间来回选择，是否出现页面错误（单选框和多选框最容易出错）  
 　　（2）测试多个查询条件时，要注意查询条件的组合测试，可能不同组合的测试会报错。  
-
-  
-
-3
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **三、添加、修改功能**
 
@@ -66,10 +56,6 @@
 　　（6）修改后增加数据后，特别要注意查询页面的数据是否及时更新，特别是在首页时要注意数据的更新。  
 　　（7）提交数据时，连续多次点击，查看系统会不会连续增加几条相同的数据或报错。  
 　　（8）若结果列表中没有记录或者没选择某条记录，点击修改按钮，系统会抛异常。  
-
-4
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **四、删除功能**
 
@@ -90,11 +76,7 @@
 　　修改——> 删除——> 增加 （新增加的内容与删除内容一致）  
 　　删除——> 删除——> 删除 （连续删除测试）  
 
-  
 
-5
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **五、注册、登陆模块**
 
@@ -116,11 +98,7 @@
 　　（11）已删除的用户名和密码  
 　　（12）登录时，当页面刷新或重新输入数据时，验证码是否更新  
 
-  
-
-6
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
+ 
 
 **六、上传图片测试**
 
@@ -134,13 +112,6 @@
 　　（7）文件类型和大小都合适，输入图片名称来上传  
 　　（8）不选择文件直接点击上传，查看是否给出提示  
 　　（9）连续多次选择不同的文件，查看是否上传最后一次选择的文件  
-　
-
-  
-
-7
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **七、查询结果列表**
 
@@ -153,47 +124,23 @@
 　　（6）点击某列进行排序，是否会报错（点击查看每一页的排序是否正确）  
 　　（7）双击或单击某列信息，是否会报错  
 
-  
-
-8
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **八、返回键检查**
 
 　　1、一条已经成功提交的记录，返回后再提交，是否做了处理  
 　　2、检查多次使用返回键的情况，在有返回键的地方，返回到原来的页面多次，查看是否会出错  
-
-  
-
-9
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **九、回车键检查**
 
 　　1、在输入结果后，直接按回车键，看系统如何处理，是否会报错  
 　
 
-10
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **十、刷新键检查**
 
 　　1、在 Web 系统中，使用刷新键，看系统如何处理，是否会报错  
 
-11
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **十一、直接 URL 链接检查**
 
 　　1、在 Web 系统中，在地址栏直接输入各个功能页面的 URL 地址，看系统如何处理，是否能够直接链接查看（匿名查看），是否有权限控制，是否直接执行，并返回相应结果页；  
-
-12
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **十二、界面和易用性测试**
 
@@ -227,11 +174,6 @@
 　　27、页面分辨率检查，在各种分辨率浏览系统检查系统界面友好性。  
 　　28、合理性检查：做 delete， update， add， cancel， back 等操作后，查看信息回到的页面是否合理。  
 　　29、检查本地化是否通过：英文版不应该有中文信息，英文翻译准确，专业。  
-　
-
-13
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **十三、兼容性测试**
 
@@ -239,13 +181,8 @@
 　　包括操作系统兼容和应用软件兼容，可能还包括硬件兼容  
 　　比如涉及到 ajax、jquery、javascript 等技术的，都要考虑到不同浏览器下的兼容性问题。  
 
-14
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **十四、链接测试**
 
-  
 　　主要是保证链接的可用性和正确性，它也是网站测试中比较重要的一个方面。  
 　　可以使用特定的工具如 XENU 来进行链接测试。  
 　　1 导航测试  
@@ -262,17 +199,9 @@
 　　（5）最后，需要验证的是文字回绕是否正确。如果说明文字指向右边的图片，应该确保该图片出现在右边。不要因为使用图片而使窗口和段落排列古怪或者出现孤行。  
 　　通常来说，使用少许或尽量不使用背景是个不错的选择。如果您想用背景，那么最好使用单色的，和导航条一起放在页面的左边。另外，图案和图片可能会转移用户的注意力。  
 
-15
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **十五、业务流程测试（主要功能测试）**
 
 　　业务流程，一般会涉及到多个模块的数据，所以在对业务流程测试时，首先要保证单个模块功能的正确性，其次就要对各个模块间传递的数据进行测试，这往往是容易出现问题的地方，测试时一定要设计不同的数据进行测试。  
-
-16
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **十六、安全性测试**
 
@@ -288,13 +217,9 @@
 　　（8）当使用了安全套接字时，还要测试加密是否正确，检查信息的完整性。  
 　　（9）服务器端的脚本常常构成安全漏洞，这些漏洞又常常被黑客利用。所以，还要测试没有经过授权，就不能在服务器端放置和编辑脚本的问题。  
 
-17
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
-
 **十七、性能测试**
 
-  
+
 　　1 连接速度测试  
 　　用户连接到 Web 应用系统的速度根据上网方式的变化而变化，他们或许是电话拨号，或是宽带上网。当下载一个程序时，用户可以等较长的时间，但如果仅仅访问一个页面就不会这样。如果 Web 系统响应时间太长（例如超过 5 秒钟），用户就会因没有耐心等待而离开。  
 　　另外，有些页面有超时的限制，如果响应速度太慢，用户可能还没来得及浏览内容，就需要重新登陆了。而且，连接速度太慢，还可能引起数据丢失，使用户得不到真实的页面。  
@@ -315,10 +240,6 @@
 　　3）长时间的使用  
 　　如果站点用于处理鲜花订单，那么至少希望它在母亲节前的一周内能持续运行。如果站点提供基于 web 的 email 服务，那么点最好能持续运行几个月，甚至几年。可能需要使用自动测试工具来完成这种类型的测试，因为很难通过手工完成这些测试。你可以想象组织 100 个人同时点击某个站点。但是同时组织 100000 个人呢。通常，测试工具在第二次使用的时候，它创造的效益，就足以支付成本。而且，测试工具安装完成之后，再次使用的时候，只要点击几下。  
 　　采取措施：采用性能测试工具 WAS、ACT，LR 等协助进行测试
-
-18
-
-![](http://mmbiz.qpic.cn/mmbiz_png/ziadDDQxbCJF7P1eficaxXO3xudUJQlicdueNt5ZCU8WcAWjqdFmsbohia8tGnaYkZ62tj2QWAhHvWpg1WSXEN0drQ/0?)
 
 **十八、测试中应该注意的其他情况**
 
