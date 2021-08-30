@@ -1,30 +1,8 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247485477&idx=1&sn=a2e5e95c10282a6d9dd275a6b84992df&scene=21#wechat_redirect
-
-——————· 今天距 2020 年 85 天 ·——————
-
-这是 ITester 软件测试小栈第 51 次推文
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr35MnEDyicD3zuuqRicfeRSXcyIhvRRuzicDFHsAffdic1k6icpEUG0mbCjBw/640?wx_fmt=gif)  
-
-大家好，我是 coco 小锦鲤
-
-欢乐的假期即将走远
-
-学习的号角继续吹响
-
-延续昨天 Monkey(一)  
-
-今天进军 Monkey(二)
-
-学到就是一件很 happy 的事
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaWTYqvwR5sOmGE1FJK4b9qWBAjcaaWh0uOpibvSa2zowRcdZwS9LLPGOUbrJEv57orQDnfTaIJvUg/640?wx_fmt=gif)  
+# Monkey(二)
 
 通过 [APP 测试之 Monkey 测试（一）](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247485462&idx=1&sn=460376ec8687e8c5adadcc9811b9ab32&scene=21#wechat_redirect)，我们了解了 Monkey 是什么，Monkey 是如何实现对 APP 进行压力测试，也熟悉了 Monkey 基本的命令，今天将在之前的基础上进行补充和拓展，一起深入接触并掌握 Monkey，这之后，我们还将总结 APP 测试常见问题，不要错过哦！  
 
 Monkey 命令组合及规范
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3Tk1qWZ1JickPX2Qiazed0vZtf3fRbKqKibldnibDfDT2PXvm09Gmia6A8gg/640?wx_fmt=gif)
 
 Monkey 参数的约束限制规范：
 
@@ -54,11 +32,7 @@ Level 2 为三个 - v 的命令，提供更加详细的测试信息，如测试�
 
 : 为每一次执行一次有效的事件后休眠 3000 毫秒；
 
-![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3lVO7G23eNjd423N8IEsbIXhfScfZ2CsCbXFxdxgtp3qI4RgibhVBvsQ/640?wx_fmt=png)
-
 Monkey 测试参数建议
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3Tk1qWZ1JickPX2Qiazed0vZtf3fRbKqKibldnibDfDT2PXvm09Gmia6A8gg/640?wx_fmt=gif)
 
 间隔时间：500 毫秒；  
 
@@ -76,19 +50,11 @@ Monkey 测试参数建议
 
 不同安卓版本（安卓 4.0 以上主流安卓版本）；
 
-![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3lVO7G23eNjd423N8IEsbIXhfScfZ2CsCbXFxdxgtp3qI4RgibhVBvsQ/640?wx_fmt=png)
-
 Monkey 参考命令
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3Tk1qWZ1JickPX2Qiazed0vZtf3fRbKqKibldnibDfDT2PXvm09Gmia6A8gg/640?wx_fmt=gif)
 
 adb shell monkey -p com.tencent.XXX(替换包名) --throttle 500 --ignore-crashes --ignore-timeouts --ignore-security-exceptions --ignore-native-crashes --monitor-native-crashes -v -v -v 1000000>d:\monkeyScreenLog.log  
 
-![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3lVO7G23eNjd423N8IEsbIXhfScfZ2CsCbXFxdxgtp3qI4RgibhVBvsQ/640?wx_fmt=png)
-
 测试可以发现的问题
-
-![](https://mmbiz.qpic.cn/mmbiz_gif/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3Tk1qWZ1JickPX2Qiazed0vZtf3fRbKqKibldnibDfDT2PXvm09Gmia6A8gg/640?wx_fmt=gif)
 
 Android 平台应用程序可能产生以下四种 Crash：
 
@@ -96,7 +62,7 @@ App 层（JAVA 应用程序）：
 
 1、Force Close Crash
 
-2、ANR Crash 
+2、ANR Crash
 
 Native 层 (本地框架)：
 
@@ -105,8 +71,6 @@ Native 层 (本地框架)：
 Kernel 层 (LINUX 内核空间)：
 
 4、Kernel Panic
-
-![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98iaX3ia4WkoOrxAzvLicgskQr3lVO7G23eNjd423N8IEsbIXhfScfZ2CsCbXFxdxgtp3qI4RgibhVBvsQ/640?wx_fmt=png)
 
 Monkey 工具九个事件
 
@@ -140,7 +104,7 @@ adb shell monkey -p com.xxx.xxx 1000 > C:\monkey.txt
 
 adb remount 获取 root 权限。
 
- 2. 数字对应下面百分比对应的数字，比如下图中 0：15.0%，表示分配 --pct-touch 事件 15%，测试 100 次分配 15 次测试 down-up
+ 1. 数字对应下面百分比对应的数字，比如下图中 0：15.0%，表示分配 --pct-touch 事件 15%，测试 100 次分配 15 次测试 down-up
 
 ![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98ia89M3ED6icTTll2ygtQAE30wylAowakN7iaeJKb6oicqNnxxXRZIH9BceSbRAXOdjWeAROVW83qSDEg/640?wx_fmt=png)
 
@@ -223,57 +187,3 @@ Monkey 后台运行
 5 . 此时 monkey 开始运行，拔掉设备和 PC 的数据线；
 
 6 . 同时需确认 logcat 和 monkey 的日志记录 ok（重新连接设备和 PC，通过 adb shell，进入 sdcard，使用 ls –l 查看，logcat 和 monkey 日志文件的大小不断变化即 ok）。
-
-以上
-
-  
-
-That‘s all
-
-ITester 小栈
-
-往期内容宠幸
-
-  
-
-[叮—这有一打让你 666 的测试终极资料包，请查收！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247484578&idx=1&sn=e7346e1733948b6d4feac1ce2d636430&scene=21#wechat_redirect)
-
-[QQ 空间面试题放送，速度教科书式扑街补救 offer！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247484537&idx=1&sn=2a25aa6fa97c27efb1c0d55ae299b994&scene=21#wechat_redirect)
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[金九银十加薪季，测试题预热一波。](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247484493&idx=1&sn=c1dd4d8a7bbc4288a7d48d4bfec10735&scene=21#wechat_redirect)
--------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[APP 测试流程及测试点总结；](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247483971&idx=1&sn=241a04ae7648d7f255f00d8f9d0d0756&scene=21#wechat_redirect)
-
-[无法拒绝 APP 测试的理由，如果你不知道，是我的错！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247485342&idx=1&sn=82b73d786bc7af86463f524efb7973b0&scene=21#wechat_redirect)
-
-[给我两小时，我能写很长长长长长长的 APP 测试用例！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247485353&idx=1&sn=8e4732a5489647ebbfbbbc43bad4baf4&scene=21#wechat_redirect)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[速看，APP 测试之 ADB 最全指南！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247485426&idx=1&sn=ac3831e1b064bee3cb1668d5deb866a9&scene=21#wechat_redirect)  
-
-[说好不哭，现在就带你了解直播类音视频测试！](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247484572&idx=1&sn=474632a405769ed15e8e62e7f9295f96&scene=21#wechat_redirect)
-
-[视频码率 / 帧率 / 采样率，了解一下？](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247483767&idx=1&sn=83b569d5db6480880cf73b63d40a27b0&scene=21#wechat_redirect)  
-
-[windows 性能分析指标解释  
-](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247483767&idx=2&sn=b9f6a12e93c86ece7a9dfa2b53efbd84&scene=21#wechat_redirect)
-
-[手机信号 G、E、O、3E 代表什么意思？](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247483767&idx=3&sn=f567aab5f1d873ef028b1c550e06e835&scene=21#wechat_redirect)  
-
-[IOS 手机耗电量测试的一个文艺玩法](https://mp.weixin.qq.com/s?__biz=MzI5MTg1NjA4Nw==&mid=2247484550&idx=1&sn=596a9b8066edc2b92af0c7334cd46253&scene=21#wechat_redirect)
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/dFZyR2JHA41zyc3p0bQYscUX4SLNtpiamySrqXx1LM8MUettUzfWoCKGrO0W6y3LEBjG6hVicZXIo2JbZr5cWBJw/640?wx_fmt=jpeg)  
-
-快来星标 置顶 关注我  
-
-![](https://mmbiz.qpic.cn/mmbiz_png/9RdLdzUL98hoibMxGSBcz1vcWWb5UmvfrtrT1OP4nfswvuT1BS26azG64ECbA8QZvicpRtYADlxvjDbow2dIkt2A/640?wx_fmt=png)
-
- T ester
-
-![](https://mmbiz.qpic.cn/mmbiz_jpg/9RdLdzUL98j4cia82AAmibDNpKicRE2xOJp03wXkGx2aol0kiaajKn0b1KpxomF9MFP6Ow4zNiaqqiaIicA2FgYPxvUJQ/640?wx_fmt=jpeg)
-
-想要获取相关资料和软件 ？  
-
-Q 群：701841415

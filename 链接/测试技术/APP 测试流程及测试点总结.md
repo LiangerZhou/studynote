@@ -1,7 +1,4 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://mp.weixin.qq.com/s?src=11×tamp=1572533368&ver=1946&signature=rbTtHGS9JBZytJtBzQXTVzEmajHFs00FTjuE-dEbVHulNiHZjZ7xxGjjda*BJB1SWZBGNnSsBCsS11H1Vnk4Jd4Ba5PDk8pZfNPymIzfBTjAro4gc5R0wrVuF5LXVrgv&new=1
-
-_1 APP_ _测试基本流程_
-================
+# APP_测试基本流程
 
 1.1 流程图
 -------
